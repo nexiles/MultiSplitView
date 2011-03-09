@@ -10,6 +10,8 @@
 
 
 #import "ViewRegistry.h"
+#import "OrgDetailViewController.h"
+
 #import "RootViewController.h"
 #import "DetailViewController.h"
 
@@ -28,6 +30,7 @@
 
   ViewRegistry *registry = [ViewRegistry sharedViewRegistry];
 
+  [registry registerViewController: [[OrgDetailViewController alloc] init] forName: @"organization"];
   [registry registerViewController: [[DetailViewController alloc] init] forName: @"detail"];
 
   // Add the split view controller's view to the window and display.

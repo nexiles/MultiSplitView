@@ -17,7 +17,7 @@
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		BF5C51231327FFFD000BB093 /* ViewRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5C51221327FFFD000BB093 /* ViewRegistry.m */; };
-		BF5C5174132807DB000BB093 /* OrgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5C5172132807DB000BB093 /* OrgViewController.m */; };
+		BF5C5174132807DB000BB093 /* OrgDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5C5172132807DB000BB093 /* OrgDetailViewController.m */; };
 		BF5C5175132807DB000BB093 /* OrgViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF5C5173132807DB000BB093 /* OrgViewController.xib */; };
 /* End PBXBuildFile section */
 
@@ -39,8 +39,8 @@
 		8D1107310486CEB800E47090 /* MultiSplitView-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MultiSplitView-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		BF5C51211327FFFD000BB093 /* ViewRegistry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewRegistry.h; sourceTree = "<group>"; };
 		BF5C51221327FFFD000BB093 /* ViewRegistry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewRegistry.m; sourceTree = "<group>"; };
-		BF5C5171132807DB000BB093 /* OrgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrgViewController.h; sourceTree = "<group>"; };
-		BF5C5172132807DB000BB093 /* OrgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrgViewController.m; sourceTree = "<group>"; };
+		BF5C5171132807DB000BB093 /* OrgDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrgDetailViewController.h; sourceTree = "<group>"; };
+		BF5C5172132807DB000BB093 /* OrgDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrgDetailViewController.m; sourceTree = "<group>"; };
 		BF5C5173132807DB000BB093 /* OrgViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = OrgViewController.xib; path = Classes/OrgViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,8 +127,8 @@
 		BF5C5176132807F5000BB093 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				BF5C5171132807DB000BB093 /* OrgViewController.h */,
-				BF5C5172132807DB000BB093 /* OrgViewController.m */,
+				BF5C5171132807DB000BB093 /* OrgDetailViewController.h */,
+				BF5C5172132807DB000BB093 /* OrgDetailViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -201,7 +201,7 @@
 				2804200B108E984D000629CD /* RootViewController.m in Sources */,
 				2804200C108E984D000629CD /* DetailViewController.m in Sources */,
 				BF5C51231327FFFD000BB093 /* ViewRegistry.m in Sources */,
-				BF5C5174132807DB000BB093 /* OrgViewController.m in Sources */,
+				BF5C5174132807DB000BB093 /* OrgDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
