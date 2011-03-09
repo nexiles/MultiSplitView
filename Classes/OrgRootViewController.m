@@ -8,6 +8,9 @@
 
 #import "OrgRootViewController.h"
 
+#import "ViewRegistry.h"
+#import "NXDataLoader.h"
+
 
 @implementation OrgRootViewController
 
@@ -29,8 +32,8 @@
   NSLog(@"%s", __func__);
   [super viewDidLoad];
 
-  //NXDataLoader *loader = [NXDataLoader sharedLoader];
-  //[self configure: [loader loadJSONFromBundle:@"organizations"]];
+  NXDataLoader *loader = [NXDataLoader sharedLoader];
+  [self configure: [loader loadBundledJSON:@"organizations"]];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -75,15 +78,21 @@
 #pragma mark -
 #pragma mark Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  // Navigation logic may go here. Create and push another view controller.
-  /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-  // ...
-  // Pass the selected object to the new view controller.
-  [self.navigationController pushViewController:detailViewController animated:YES];
-  [detailViewController release];
-  */
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  NSLog(@"%s", __func__);
+
+  ViewRegistry *registry = [ViewRegistry sharedViewRegistry];
+  id<ConfigurableViewController> viewController = [registry controllerForName:@"organization.detail"];
+  NSLog(@"%s: viewController=%@", __func__, viewController);
+  
+
+  NSInteger row = [indexPath row];
+  NSDictionary *org = [[self organizations] objectAtIndex: row];
+  NSLog(@"%s: org=%@", __func__, org);
+  
+  [viewController configure:org];
+  //[self.navigationController pushViewController:viewController animated:YES];
 }
 
 
@@ -91,22 +100,16 @@
 #pragma mark Memory management
 
 - (void)didReceiveMemoryWarning {
-  // Releases the view if it doesn't have a superview.
   [super didReceiveMemoryWarning];
-
-  // Relinquish ownership any cached data, images, etc. that aren't in use.
 }
 
 - (void)viewDidUnload {
-  // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-  // For example: self.myOutlet = nil;
 }
 
 
 - (void)dealloc {
   [super dealloc];
 }
-
 
 @end
 

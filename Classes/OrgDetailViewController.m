@@ -30,10 +30,6 @@
 - (void)viewDidLoad {
   NSLog(@"%s", __func__);
   [super viewDidLoad];
-
-  self.name = @"Organization Foo";
-  self.title = self.name;
-  self.products = [NSArray arrayWithObjects: @"Product A", @"Product B", @"Product C", nil];
 }
 
 

@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol ConfigurableViewController <NSObject>
+
+-(void)configure:(NSDictionary *)info;
+
+@end
 
 @interface ViewRegistry : NSObject {
 	NSMutableDictionary *_registry;
@@ -17,8 +22,8 @@
 
 +(ViewRegistry *)sharedViewRegistry;
 
--(void)registerViewController:(id)controller forName:(NSString *)name;
--(id)controllerForName:(NSString *)name;
+-(void)registerViewController:(id <ConfigurableViewController>)controller forName:(NSString *)name;
+-(id <ConfigurableViewController>)controllerForName:(NSString *)name;
 
 @end
 

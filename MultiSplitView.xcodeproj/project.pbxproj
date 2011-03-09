@@ -11,9 +11,6 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		2804200B108E984D000629CD /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28042008108E984D000629CD /* RootViewController.m */; };
-		2804200C108E984D000629CD /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2804200A108E984D000629CD /* DetailViewController.m */; };
-		2804203C108E9BAB000629CD /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2804203B108E9BAB000629CD /* DetailView.xib */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		BF5C51231327FFFD000BB093 /* ViewRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5C51221327FFFD000BB093 /* ViewRegistry.m */; };
@@ -36,11 +33,6 @@
 		1D3623250D0F684500981E51 /* MultiSplitViewAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiSplitViewAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* MultiSplitView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiSplitView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		28042007108E984D000629CD /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		28042008108E984D000629CD /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		28042009108E984D000629CD /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		2804200A108E984D000629CD /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
-		2804203B108E9BAB000629CD /* DetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailView.xib; sourceTree = "<group>"; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AAE50D9B0CCF005BE974 /* MultiSplitView_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiSplitView_Prefix.pch; sourceTree = "<group>"; };
 		28AD735F0D9D9599002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -89,10 +81,6 @@
 			children = (
 				1D3623240D0F684500981E51 /* MultiSplitViewAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MultiSplitViewAppDelegate.m */,
-				28042007108E984D000629CD /* RootViewController.h */,
-				28042008108E984D000629CD /* RootViewController.m */,
-				28042009108E984D000629CD /* DetailViewController.h */,
-				2804200A108E984D000629CD /* DetailViewController.m */,
 				BF5C51211327FFFD000BB093 /* ViewRegistry.h */,
 				BF5C51221327FFFD000BB093 /* ViewRegistry.m */,
 				BF5C5176132807F5000BB093 /* View Controllers */,
@@ -137,7 +125,6 @@
 			children = (
 				BF5C5173132807DB000BB093 /* OrgDetailViewController.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
-				2804203B108E9BAB000629CD /* DetailView.xib */,
 				BF5C51C313281669000BB093 /* OrgRootViewController.xib */,
 				8D1107310486CEB800E47090 /* MultiSplitView-Info.plist */,
 				BF5C5222132821B3000BB093 /* organizations.json */,
@@ -236,7 +223,6 @@
 			files = (
 				BF5C523E1328232F000BB093 /* organizations.json in Resources */,
 				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
-				2804203C108E9BAB000629CD /* DetailView.xib in Resources */,
 				BF5C5175132807DB000BB093 /* OrgDetailViewController.xib in Resources */,
 				BF5C51C513281669000BB093 /* OrgRootViewController.xib in Resources */,
 			);
@@ -251,8 +237,6 @@
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* MultiSplitViewAppDelegate.m in Sources */,
-				2804200B108E984D000629CD /* RootViewController.m in Sources */,
-				2804200C108E984D000629CD /* DetailViewController.m in Sources */,
 				BF5C51231327FFFD000BB093 /* ViewRegistry.m in Sources */,
 				BF5C5174132807DB000BB093 /* OrgDetailViewController.m in Sources */,
 				BF5C51C413281669000BB093 /* OrgRootViewController.m in Sources */,
