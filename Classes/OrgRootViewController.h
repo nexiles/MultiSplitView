@@ -11,6 +11,13 @@
 
 @interface OrgRootViewController : UITableViewController {
 
+	NSArray * _organizations;
 }
 
+@property (nonatomic, retain) NSArray  * organizations;
+
+-(void)configure:(NSDictionary *)info;
+
 @end
+
+// vim: set ts=2 sw=2 expandtab:
