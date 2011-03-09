@@ -10,6 +10,8 @@
 
 
 #import "ViewRegistry.h"
+#import "NXDataLoader.h"
+
 #import "OrgDetailViewController.h"
 #import "OrgRootViewController.h"
 
@@ -34,6 +36,11 @@
   [registry registerViewController: [[OrgRootViewController alloc] init] forName: @"organization.root"];
   [registry registerViewController: [[OrgDetailViewController alloc] init] forName: @"organization.detail"];
   [registry registerViewController: [[DetailViewController alloc] init] forName: @"detail"];
+
+  // data loader test
+  id json = [[NXDataLoader sharedLoader] loadBundledJSON:@"organizations"];
+  NSLog(@"%s: json=%@", __func__, json);
+  
 
   // Add the split view controller's view to the window and display.
   [self.window addSubview:splitViewController.view];

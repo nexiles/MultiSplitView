@@ -1,0 +1,28 @@
+{
+    "organizations": [
+        {
+            "name": "Nexiles", 
+            "products": [
+                "Product A", 
+                "Product B", 
+                "Product C"
+            ]
+        }, 
+        {
+            "name": "Demo Orga", 
+            "products": [
+                "Product X", 
+                "Product Y", 
+                "Product Z"
+            ]
+        }, 
+        {
+            "name": "Another Orga", 
+            "products": [
+                "Product 1", 
+                "Product 2", 
+                "Product 3"
+            ]
+        }
+    ]
+}
