@@ -9,6 +9,7 @@
 #import "MultiSplitViewAppDelegate.h"
 
 
+#import "ViewRegistry.h"
 #import "RootViewController.h"
 #import "DetailViewController.h"
 
@@ -21,15 +22,19 @@
 #pragma mark -
 #pragma mark Application lifecycle
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-    
-    // Override point for customization after app launch.
-    
-    // Add the split view controller's view to the window and display.
-    [self.window addSubview:splitViewController.view];
-    [self.window makeKeyAndVisible];
-    
-    return YES;
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+  NSLog(@"%s", __func__);
+
+  ViewRegistry *registry = [ViewRegistry sharedViewRegistry];
+
+  [registry registerViewController: [[DetailViewController alloc] init] forName: @"detail"];
+
+  // Add the split view controller's view to the window and display.
+  [self.window addSubview:splitViewController.view];
+  [self.window makeKeyAndVisible];
+
+  return YES;
 }
 
 
@@ -73,4 +78,5 @@
 
 
 @end
+// vim: set ts=2 sw=2 expandtab:
 
