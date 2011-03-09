@@ -17,6 +17,15 @@
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		BF5C51231327FFFD000BB093 /* ViewRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5C51221327FFFD000BB093 /* ViewRegistry.m */; };
+		BF5C5174132807DB000BB093 /* OrgDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5C5172132807DB000BB093 /* OrgDetailViewController.m */; };
+		BF5C5175132807DB000BB093 /* OrgDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF5C5173132807DB000BB093 /* OrgDetailViewController.xib */; };
+		BF5C51C413281669000BB093 /* OrgRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5C51C213281669000BB093 /* OrgRootViewController.m */; };
+		BF5C51C513281669000BB093 /* OrgRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF5C51C313281669000BB093 /* OrgRootViewController.xib */; };
+		BF5C51D513281A11000BB093 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5C51CC13281A11000BB093 /* NSObject+SBJSON.m */; };
+		BF5C51D613281A11000BB093 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5C51CE13281A11000BB093 /* NSString+SBJSON.m */; };
+		BF5C51D713281A11000BB093 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5C51D013281A11000BB093 /* SBJsonBase.m */; };
+		BF5C51D813281A11000BB093 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5C51D213281A11000BB093 /* SBJsonParser.m */; };
+		BF5C51D913281A11000BB093 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5C51D413281A11000BB093 /* SBJsonWriter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +46,23 @@
 		8D1107310486CEB800E47090 /* MultiSplitView-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MultiSplitView-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		BF5C51211327FFFD000BB093 /* ViewRegistry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewRegistry.h; sourceTree = "<group>"; };
 		BF5C51221327FFFD000BB093 /* ViewRegistry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewRegistry.m; sourceTree = "<group>"; };
+		BF5C5171132807DB000BB093 /* OrgDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrgDetailViewController.h; sourceTree = "<group>"; };
+		BF5C5172132807DB000BB093 /* OrgDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrgDetailViewController.m; sourceTree = "<group>"; };
+		BF5C5173132807DB000BB093 /* OrgDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = OrgDetailViewController.xib; path = Classes/OrgDetailViewController.xib; sourceTree = "<group>"; };
+		BF5C51C113281669000BB093 /* OrgRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrgRootViewController.h; sourceTree = "<group>"; };
+		BF5C51C213281669000BB093 /* OrgRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrgRootViewController.m; sourceTree = "<group>"; };
+		BF5C51C313281669000BB093 /* OrgRootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = OrgRootViewController.xib; path = Classes/OrgRootViewController.xib; sourceTree = "<group>"; };
+		BF5C51CA13281A11000BB093 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		BF5C51CB13281A11000BB093 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		BF5C51CC13281A11000BB093 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
+		BF5C51CD13281A11000BB093 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		BF5C51CE13281A11000BB093 /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
+		BF5C51CF13281A11000BB093 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		BF5C51D013281A11000BB093 /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
+		BF5C51D113281A11000BB093 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		BF5C51D213281A11000BB093 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		BF5C51D313281A11000BB093 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		BF5C51D413281A11000BB093 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +90,7 @@
 				2804200A108E984D000629CD /* DetailViewController.m */,
 				BF5C51211327FFFD000BB093 /* ViewRegistry.h */,
 				BF5C51221327FFFD000BB093 /* ViewRegistry.m */,
+				BF5C5176132807F5000BB093 /* View Controllers */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -91,6 +118,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				BF5C51DA13281A14000BB093 /* SBJSON */,
 				28A0AAE50D9B0CCF005BE974 /* MultiSplitView_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
@@ -100,8 +128,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BF5C5173132807DB000BB093 /* OrgDetailViewController.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				2804203B108E9BAB000629CD /* DetailView.xib */,
+				BF5C51C313281669000BB093 /* OrgRootViewController.xib */,
 				8D1107310486CEB800E47090 /* MultiSplitView-Info.plist */,
 			);
 			name = Resources;
@@ -115,6 +145,35 @@
 				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF5C5176132807F5000BB093 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BF5C5171132807DB000BB093 /* OrgDetailViewController.h */,
+				BF5C5172132807DB000BB093 /* OrgDetailViewController.m */,
+				BF5C51C113281669000BB093 /* OrgRootViewController.h */,
+				BF5C51C213281669000BB093 /* OrgRootViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		BF5C51DA13281A14000BB093 /* SBJSON */ = {
+			isa = PBXGroup;
+			children = (
+				BF5C51CA13281A11000BB093 /* JSON.h */,
+				BF5C51CB13281A11000BB093 /* NSObject+SBJSON.h */,
+				BF5C51CC13281A11000BB093 /* NSObject+SBJSON.m */,
+				BF5C51CD13281A11000BB093 /* NSString+SBJSON.h */,
+				BF5C51CE13281A11000BB093 /* NSString+SBJSON.m */,
+				BF5C51CF13281A11000BB093 /* SBJsonBase.h */,
+				BF5C51D013281A11000BB093 /* SBJsonBase.m */,
+				BF5C51D113281A11000BB093 /* SBJsonParser.h */,
+				BF5C51D213281A11000BB093 /* SBJsonParser.m */,
+				BF5C51D313281A11000BB093 /* SBJsonWriter.h */,
+				BF5C51D413281A11000BB093 /* SBJsonWriter.m */,
+			);
+			name = SBJSON;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,6 +228,8 @@
 			files = (
 				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
 				2804203C108E9BAB000629CD /* DetailView.xib in Resources */,
+				BF5C5175132807DB000BB093 /* OrgDetailViewController.xib in Resources */,
+				BF5C51C513281669000BB093 /* OrgRootViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +245,13 @@
 				2804200B108E984D000629CD /* RootViewController.m in Sources */,
 				2804200C108E984D000629CD /* DetailViewController.m in Sources */,
 				BF5C51231327FFFD000BB093 /* ViewRegistry.m in Sources */,
+				BF5C5174132807DB000BB093 /* OrgDetailViewController.m in Sources */,
+				BF5C51C413281669000BB093 /* OrgRootViewController.m in Sources */,
+				BF5C51D513281A11000BB093 /* NSObject+SBJSON.m in Sources */,
+				BF5C51D613281A11000BB093 /* NSString+SBJSON.m in Sources */,
+				BF5C51D713281A11000BB093 /* SBJsonBase.m in Sources */,
+				BF5C51D813281A11000BB093 /* SBJsonParser.m in Sources */,
+				BF5C51D913281A11000BB093 /* SBJsonWriter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
