@@ -12,13 +12,15 @@
 
 @interface OrgRootViewController : UITableViewController {
 
-  NSArray          * _organizations;
+  NSString                         * _name;
+  NSArray                          * _organizations;
 
-  IBOutlet OrgRootViewController * detailView;
+  IBOutlet OrgDetailViewController * detailView;
 }
 
-@property (nonatomic, retain) OrgRootViewController * detailView;
-@property (nonatomic, retain) NSArray               * organizations;
+@property (nonatomic, retain) NSString                * name;
+@property (nonatomic, retain) OrgDetailViewController * detailView;
+@property (nonatomic, retain) NSArray                 * organizations;
 
 -(void)configure:(NSDictionary *)info;
 

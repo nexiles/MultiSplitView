@@ -40,6 +40,11 @@
 
   //self.splitViewController.viewControllers = viewControllers;
 
+  NSLog(@"%s: self.splitViewController.viewControllers=%@", __func__, self.splitViewController.viewControllers);
+  NSLog(@"%s: self.splitViewController.viewControllers 0=%@", __func__, [[self.splitViewController.viewControllers objectAtIndex:0] viewControllers]);
+  NSLog(@"%s: self.splitViewController.viewControllers 1=%@", __func__, [[self.splitViewController.viewControllers objectAtIndex:1] viewControllers]);
+  
+
   // Add the split view controller's view to the window and display.
   [self.window addSubview:splitViewController.view];
   [self.window makeKeyAndVisible];

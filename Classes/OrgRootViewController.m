@@ -11,10 +11,14 @@
 #import "ViewRegistry.h"
 #import "NXDataLoader.h"
 
+@interface OrgRootViewController ()
+-(void)configureView;
+@end
 
 @implementation OrgRootViewController
 
 @synthesize organizations = _organizations;
+@synthesize name = _name;
 @synthesize detailView;
 
 -(void)configure:(NSDictionary *)info
@@ -25,6 +29,8 @@
   NSLog(@"%s: orgs=%@", __func__, orgs);
 
   self.organizations = orgs;
+
+  [self configureView];
 }
 
 #pragma mark -
@@ -38,8 +44,17 @@
   NSLog(@"%s", __func__);
   [super viewDidLoad];
 
+  self.name = @"Organizations";
+
   NXDataLoader *loader = [NXDataLoader sharedLoader];
   [self configure: [loader loadBundledJSON:@"organizations"]];
+}
+
+-(void)configureView
+{
+  self.title = self.name;
+
+  [[self view] reloadData];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

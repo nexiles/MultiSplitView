@@ -11,12 +11,16 @@
 
 @interface OrgDetailViewController : UITableViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate> {
 
-    NSString * _name;
-    NSArray  * _products;
+  NSString             * _name;
+  NSArray              * _products;
+
+  IBOutlet UITableView * tableView;
 }
 
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSArray  * products;
+@property (nonatomic, retain) NSString    * name;
+@property (nonatomic, retain) NSArray     * products;
+
+@property (nonatomic, retain) UITableView * tableView;
 
 -(void)configure:(NSDictionary *)info;
 

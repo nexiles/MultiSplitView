@@ -19,6 +19,7 @@
 @synthesize name     = _name;
 @synthesize products = _products;
 @synthesize popoverController;
+@synthesize tableView;
 
 -(void)configure:(NSDictionary *)info
 {
