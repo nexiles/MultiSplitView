@@ -63,8 +63,21 @@ static ViewRegistry* _sharedViewRegistry = nil;
   [_registry setObject:controller forKey:name];
 }
 
+- (void)registerRootController:(id <ConfigurableViewController>)controller forName:(NSString *)name
+{
+  NSString *key = [NSString stringWithFormat:@"%@.root", name];
+  [self registerViewController:controller forName:key];
+}
+
+- (void)registerDetailController:(id <ConfigurableViewController>)controller forName:(NSString *)name
+{
+  NSString *key = [NSString stringWithFormat:@"%@.detail", name];
+  [self registerViewController:controller forName:key];
+}
+
 -(id)controllerForName:(NSString *)name
 {
+
   NSLog(@"%s: name=%@", __func__, name);
   return [_registry objectForKey:name];
 }

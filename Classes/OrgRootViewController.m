@@ -15,13 +15,26 @@
 @implementation OrgRootViewController
 
 @synthesize organizations = _organizations;
+@synthesize name = _name;
+@synthesize detailView;
 
 -(void)configure:(NSDictionary *)info
 {
   NSLog(@"%s", __func__);
 
-  NSArray *orgs = [info objectForKey:@"organizations"];
+  NSArray *orgs = [info objectForKey:self.name];
   self.organizations = orgs;
+}
+
+#pragma mark -
+#pragma mark initialization
+
+- (id)init
+{
+  if (self = [super init]) {
+    _name = @"organizations";
+  }
+  return self;
 }
 
 #pragma mark -
@@ -85,12 +98,12 @@
   ViewRegistry *registry = [ViewRegistry sharedViewRegistry];
   id<ConfigurableViewController> viewController = [registry controllerForName:@"organization.detail"];
   NSLog(@"%s: viewController=%@", __func__, viewController);
-  
+
 
   NSInteger row = [indexPath row];
   NSDictionary *org = [[self organizations] objectAtIndex: row];
   NSLog(@"%s: org=%@", __func__, org);
-  
+
   [viewController configure:org];
   //[self.navigationController pushViewController:viewController animated:YES];
 }

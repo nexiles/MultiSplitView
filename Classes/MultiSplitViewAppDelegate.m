@@ -29,15 +29,16 @@
 
   ViewRegistry *registry = [ViewRegistry sharedViewRegistry];
 
-  [registry registerViewController: [[OrgRootViewController alloc] init] forName: @"organization.root"];
-  [registry registerViewController: [[OrgDetailViewController alloc] init] forName: @"organization.detail"];
+  //[registry registerViewController: [[OrgRootViewController alloc] init] forName: @"organization.root"];
+  //[registry registerViewController: [[OrgDetailViewController alloc] init] forName: @"organization.detail"];
 
-  NSArray *viewControllers = [NSArray arrayWithObjects:
-          [registry controllerForName:@"organization.root"],
-          [registry controllerForName:@"organization.detail"],
-          nil];
 
-  self.splitViewController.viewControllers = viewControllers;
+  //NSArray *viewControllers = [NSArray arrayWithObjects:
+          //[registry controllerForName:@"organization.root"],
+          //[registry controllerForName:@"organization.detail"],
+          //nil];
+
+  //self.splitViewController.viewControllers = viewControllers;
 
   // Add the split view controller's view to the window and display.
   [self.window addSubview:splitViewController.view];

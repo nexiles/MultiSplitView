@@ -7,7 +7,11 @@
 //
 
 #import "OrgDetailViewController.h"
+#import "NXDataLoader.h"
 
+@interface OrgDetailViewController ()
+-(void)configureView;
+@end
 
 @implementation OrgDetailViewController
 
@@ -16,13 +20,13 @@
 
 -(void)configure:(NSDictionary *)info
 {
-	NSLog(@"%s", __func__);
+  NSLog(@"%s", __func__);
 
   self.name = [info objectForKey:@"name"];
   self.products = [info objectForKey:@"products"];
 
+  [self configureView];
 }
-
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -30,6 +34,11 @@
 - (void)viewDidLoad {
   NSLog(@"%s", __func__);
   [super viewDidLoad];
+
+  // load default org
+  NXDataLoader *loader = [NXDataLoader sharedLoader];
+  NSDictionary *defaultOrg = [loader loadBundledJSON:@"organization-default"];
+  [self configure:defaultOrg];
 }
 
 
@@ -38,6 +47,11 @@
     return YES;
 }
 
+- (void)configureView
+{
+   NSLog(@"%s", __func__);
+   self.title = self.name;
+}
 
 #pragma mark -
 #pragma mark Table view data source
@@ -47,8 +61,29 @@
     return 2;
 }
 
+//- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+//{
+  //return [NSArray arrayWithObjects: @"Organization details", @"Products", nil];
+//}
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+  switch (section) {
+    case 0:
+      return @"Organization details";
+
+    case 1:
+      return @"Products";
+    default:
+      return @"??";
+  }
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+  NSLog(@"%s", __func__);
+
   switch (section) {
     case 0:
       return 1;
@@ -63,49 +98,56 @@
 
 -(UITableViewCell *)orgCellWithLabel:(NSString *)label andDetail:(NSString *)detail tableView:(UITableView *)tableView
 {
-    static NSString *CellIdentifier = @"ProductCell";
+  NSLog(@"%s", __func__);
+  static NSString *CellIdentifier = @"ProductCell";
 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
-                                       reuseIdentifier:CellIdentifier] autorelease];
-    }
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  if (cell == nil) {
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+                                   reuseIdentifier:CellIdentifier] autorelease];
+  }
 
-    cell.textLabel.text = label;
-    cell.detailTextLabel.text = detail;
+  cell.textLabel.text = label;
+  cell.detailTextLabel.text = detail;
 
-    return cell;
+  return cell;
 }
 
 -(UITableViewCell *)productCellwithLabel:(NSString *)label andDetail:(NSString *)detail tableView:(UITableView *)tableView
 {
-    static NSString *CellIdentifier = @"OrgCell";
+  NSLog(@"%s", __func__);
+  static NSString *CellIdentifier = @"OrgCell";
 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                       reuseIdentifier:CellIdentifier] autorelease];
-    }
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  if (cell == nil) {
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                   reuseIdentifier:CellIdentifier] autorelease];
+  }
 
-    cell.textLabel.text = label;
+  cell.textLabel.text = label;
+
+  if (detail) 
     cell.detailTextLabel.text = detail;
 
-    return cell;
+  return cell;
 }
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  NSLog(@"%s: indexPath=%@", __func__, indexPath);
+  
+  NSInteger section = [indexPath section];
   NSInteger row = [indexPath row];
   UITableViewCell *cell = nil;
 
-  if (row == 0) {
-    cell = [self orgCellWithLabel: self.name
-                        andDetail: @"foo"
+  if (section == 0) {
+    cell = [self orgCellWithLabel: @"Name"
+                        andDetail: self.name
                         tableView: tableView];
   } else {
     cell = [self productCellwithLabel: [[self products] objectAtIndex: row]
-                            andDetail: @"foo"
+                            andDetail: nil
                             tableView: tableView];
   }
 

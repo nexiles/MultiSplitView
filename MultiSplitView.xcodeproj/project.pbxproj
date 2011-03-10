@@ -25,6 +25,7 @@
 		BF5C51D913281A11000BB093 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5C51D413281A11000BB093 /* SBJsonWriter.m */; };
 		BF5C51F513281D3C000BB093 /* NXDataLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5C51F413281D3C000BB093 /* NXDataLoader.m */; };
 		BF5C523E1328232F000BB093 /* organizations.json in Resources */ = {isa = PBXBuildFile; fileRef = BF5C5222132821B3000BB093 /* organizations.json */; };
+		BF5C52B41328CF6C000BB093 /* organization-default.json in Resources */ = {isa = PBXBuildFile; fileRef = BF5C52B31328CF6C000BB093 /* organization-default.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		BF5C51F313281D3C000BB093 /* NXDataLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXDataLoader.h; sourceTree = "<group>"; };
 		BF5C51F413281D3C000BB093 /* NXDataLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXDataLoader.m; sourceTree = "<group>"; };
 		BF5C5222132821B3000BB093 /* organizations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = organizations.json; sourceTree = "<group>"; };
+		BF5C52B31328CF6C000BB093 /* organization-default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "organization-default.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BF5C52B31328CF6C000BB093 /* organization-default.json */,
 				BF5C5173132807DB000BB093 /* OrgDetailViewController.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				BF5C51C313281669000BB093 /* OrgRootViewController.xib */,
@@ -225,6 +228,7 @@
 				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
 				BF5C5175132807DB000BB093 /* OrgDetailViewController.xib in Resources */,
 				BF5C51C513281669000BB093 /* OrgRootViewController.xib in Resources */,
+				BF5C52B41328CF6C000BB093 /* organization-default.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
