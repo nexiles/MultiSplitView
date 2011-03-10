@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface OrgDetailViewController : UITableViewController {
+@interface OrgDetailViewController : UITableViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate> {
 
     NSString * _name;
     NSArray  * _products;

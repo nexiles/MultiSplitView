@@ -11,12 +11,14 @@
 
 @interface OrgDetailViewController ()
 -(void)configureView;
+@property (nonatomic, retain) UIPopoverController *popoverController;
 @end
 
 @implementation OrgDetailViewController
 
 @synthesize name     = _name;
 @synthesize products = _products;
+@synthesize popoverController;
 
 -(void)configure:(NSDictionary *)info
 {
@@ -24,6 +26,10 @@
 
   self.name = [info objectForKey:@"name"];
   self.products = [info objectForKey:@"products"];
+
+  if (self.popoverController != nil) {
+    [self.popoverController dismissPopoverAnimated:YES];
+  }        
 
   [self configureView];
 }
@@ -52,6 +58,29 @@
    NSLog(@"%s", __func__);
    self.title = self.name;
 }
+
+#pragma mark -
+#pragma mark Split View Controller Delegate
+
+- (void)splitViewController:(UISplitViewController*)svc 
+     willHideViewController:(UIViewController *)aViewController 
+          withBarButtonItem:(UIBarButtonItem*)barButtonItem 
+       forPopoverController:(UIPopoverController*)pc
+{  
+  [barButtonItem setTitle:@"Organizations"];
+  [[self navigationItem] setLeftBarButtonItem:barButtonItem];
+  [self setPopoverController:pc];
+}
+ 
+ 
+- (void)splitViewController:(UISplitViewController*)svc 
+     willShowViewController:(UIViewController *)aViewController 
+  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
+  [[self navigationItem] setLeftBarButtonItem:nil];
+  [self setPopoverController:nil];
+}
+
 
 #pragma mark -
 #pragma mark Table view data source
