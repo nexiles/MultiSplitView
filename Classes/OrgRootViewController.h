@@ -8,18 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+#import "OrgDetailViewController.h"
 
 @interface OrgRootViewController : UITableViewController {
 
-  NSString         * _name;
   NSArray          * _organizations;
 
-  IBOutlet UIViewController * detailView;
+  IBOutlet OrgRootViewController * detailView;
 }
 
-@property (nonatomic, retain) NSString         * name;
-@property (nonatomic, retain) UIViewController * detailView;
-@property (nonatomic, retain) NSArray          * organizations;
+@property (nonatomic, retain) OrgRootViewController * detailView;
+@property (nonatomic, retain) NSArray               * organizations;
 
 -(void)configure:(NSDictionary *)info;
 

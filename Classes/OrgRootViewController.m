@@ -15,27 +15,20 @@
 @implementation OrgRootViewController
 
 @synthesize organizations = _organizations;
-@synthesize name = _name;
 @synthesize detailView;
 
 -(void)configure:(NSDictionary *)info
 {
-  NSLog(@"%s", __func__);
+  NSLog(@"%s: info=%@", __func__, info);
 
-  NSArray *orgs = [info objectForKey:self.name];
+  NSArray *orgs = [info objectForKey:@"organizations"];
+  NSLog(@"%s: orgs=%@", __func__, orgs);
+
   self.organizations = orgs;
 }
 
 #pragma mark -
 #pragma mark initialization
-
-- (id)init
-{
-  if (self = [super init]) {
-    _name = @"organizations";
-  }
-  return self;
-}
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -71,7 +64,9 @@
 
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  NSLog(@"%s: indexPath=%@", __func__, indexPath);
 
   static NSString *CellIdentifier = @"Cell";
 
@@ -95,17 +90,11 @@
 {
   NSLog(@"%s", __func__);
 
-  ViewRegistry *registry = [ViewRegistry sharedViewRegistry];
-  id<ConfigurableViewController> viewController = [registry controllerForName:@"organization.detail"];
-  NSLog(@"%s: viewController=%@", __func__, viewController);
-
-
   NSInteger row = [indexPath row];
   NSDictionary *org = [[self organizations] objectAtIndex: row];
   NSLog(@"%s: org=%@", __func__, org);
 
-  [viewController configure:org];
-  //[self.navigationController pushViewController:viewController animated:YES];
+  [self.detailView configure:org];
 }
 
 
@@ -118,7 +107,6 @@
 
 - (void)viewDidUnload {
 }
-
 
 - (void)dealloc {
   [super dealloc];

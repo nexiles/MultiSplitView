@@ -27,7 +27,7 @@
 {
   NSLog(@"%s", __func__);
 
-  ViewRegistry *registry = [ViewRegistry sharedViewRegistry];
+  //ViewRegistry *registry = [ViewRegistry sharedViewRegistry];
 
   //[registry registerViewController: [[OrgRootViewController alloc] init] forName: @"organization.root"];
   //[registry registerViewController: [[OrgDetailViewController alloc] init] forName: @"organization.detail"];

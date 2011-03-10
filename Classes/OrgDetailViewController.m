@@ -57,6 +57,8 @@
 {
    NSLog(@"%s", __func__);
    self.title = self.name;
+
+   [[self tableView] reloadData];
 }
 
 #pragma mark -
