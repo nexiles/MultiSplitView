@@ -127,15 +127,17 @@
   }
 }
 
--(UITableViewCell *)orgCellWithLabel:(NSString *)label andDetail:(NSString *)detail tableView:(UITableView *)tableView
+-(UITableViewCell *)productCellwithLabel:(NSString *)label andDetail:(NSString *)detail tableView:(UITableView *)tableView
 {
   NSLog(@"%s", __func__);
   static NSString *CellIdentifier = @"ProductCell";
 
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                    reuseIdentifier:CellIdentifier] autorelease];
+
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
 
   cell.textLabel.text = label;
@@ -144,14 +146,14 @@
   return cell;
 }
 
--(UITableViewCell *)productCellwithLabel:(NSString *)label andDetail:(NSString *)detail tableView:(UITableView *)tableView
+-(UITableViewCell *)orgCellWithLabel:(NSString *)label andDetail:(NSString *)detail tableView:(UITableView *)tableView
 {
   NSLog(@"%s", __func__);
   static NSString *CellIdentifier = @"OrgCell";
 
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
                                    reuseIdentifier:CellIdentifier] autorelease];
   }
 
