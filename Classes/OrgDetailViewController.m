@@ -7,33 +7,45 @@
 //
 
 #import "OrgDetailViewController.h"
+#import "NXDataLoader.h"
 
+@interface OrgDetailViewController ()
+-(void)configureView;
+@property (nonatomic, retain) UIPopoverController *popoverController;
+@end
 
 @implementation OrgDetailViewController
 
 @synthesize name     = _name;
 @synthesize products = _products;
+@synthesize popoverController;
+@synthesize tableView;
 
 -(void)configure:(NSDictionary *)info
 {
-	NSLog(@"%s", __func__);
-
+  NSLog(@"%s: self=%@", __func__, self);
+  
   self.name = [info objectForKey:@"name"];
   self.products = [info objectForKey:@"products"];
 
-}
+  if (self.popoverController != nil) {
+    [self.popoverController dismissPopoverAnimated:YES];
+  }        
 
+  [self configureView];
+}
 
 #pragma mark -
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
-  NSLog(@"%s", __func__);
+  NSLog(@"%s: self=%@", __func__, self);
   [super viewDidLoad];
 
-  self.name = @"Organization Foo";
-  self.title = self.name;
-  self.products = [NSArray arrayWithObjects: @"Product A", @"Product B", @"Product C", nil];
+  // load default org
+  NXDataLoader *loader = [NXDataLoader sharedLoader];
+  NSDictionary *defaultOrg = [loader loadBundledJSON:@"organization-default"];
+  [self configure:defaultOrg];
 }
 
 
@@ -42,17 +54,68 @@
     return YES;
 }
 
+- (void)configureView
+{
+   NSLog(@"%s", __func__);
+   self.title = self.name;
+
+   [[self tableView] reloadData];
+}
+
+#pragma mark -
+#pragma mark Split View Controller Delegate
+
+- (void)splitViewController:(UISplitViewController*)svc 
+     willHideViewController:(UIViewController *)aViewController 
+          withBarButtonItem:(UIBarButtonItem*)barButtonItem 
+       forPopoverController:(UIPopoverController*)pc
+{  
+  [barButtonItem setTitle:@"Organizations"];
+  [[self navigationItem] setLeftBarButtonItem:barButtonItem];
+  [self setPopoverController:pc];
+}
+ 
+ 
+- (void)splitViewController:(UISplitViewController*)svc 
+     willShowViewController:(UIViewController *)aViewController 
+  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
+  [[self navigationItem] setLeftBarButtonItem:nil];
+  [self setPopoverController:nil];
+}
+
 
 #pragma mark -
 #pragma mark Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
     // Return the number of sections.
     return 2;
 }
 
+//- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)theTableView
+//{
+  //return [NSArray arrayWithObjects: @"Organization details", @"Products", nil];
+//}
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSString *)tableView:(UITableView *)theTableView titleForHeaderInSection:(NSInteger)section
+{
+  switch (section) {
+    case 0:
+      return @"Organization details";
+
+    case 1:
+      return @"Products";
+    default:
+      return @"??";
+  }
+}
+
+
+- (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section
+{
+  NSLog(@"%s", __func__);
+
   switch (section) {
     case 0:
       return 1;
@@ -65,52 +128,62 @@
   }
 }
 
--(UITableViewCell *)orgCellWithLabel:(NSString *)label andDetail:(NSString *)detail tableView:(UITableView *)tableView
+-(UITableViewCell *)productCellwithLabel:(NSString *)label andDetail:(NSString *)detail tableView:(UITableView *)theTableView
 {
-    static NSString *CellIdentifier = @"ProductCell";
+  NSLog(@"%s", __func__);
+  static NSString *CellIdentifier = @"ProductCell";
 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
-                                       reuseIdentifier:CellIdentifier] autorelease];
-    }
+  UITableViewCell *cell = [theTableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  if (cell == nil) {
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                   reuseIdentifier:CellIdentifier] autorelease];
 
-    cell.textLabel.text = label;
-    cell.detailTextLabel.text = detail;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  }
 
-    return cell;
+  cell.textLabel.text = label;
+  cell.detailTextLabel.text = detail;
+
+  return cell;
 }
 
--(UITableViewCell *)productCellwithLabel:(NSString *)label andDetail:(NSString *)detail tableView:(UITableView *)tableView
+-(UITableViewCell *)orgCellWithLabel:(NSString *)label andDetail:(NSString *)detail tableView:(UITableView *)theTableView
 {
-    static NSString *CellIdentifier = @"OrgCell";
+  NSLog(@"%s", __func__);
+  static NSString *CellIdentifier = @"OrgCell";
 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                       reuseIdentifier:CellIdentifier] autorelease];
-    }
+  UITableViewCell *cell = [theTableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  if (cell == nil) {
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+                                   reuseIdentifier:CellIdentifier] autorelease];
+  }
 
-    cell.textLabel.text = label;
+  cell.textLabel.text = label;
+
+  if (detail) 
     cell.detailTextLabel.text = detail;
 
-    return cell;
+  return cell;
 }
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  NSLog(@"%s: self=%@", __func__, self);
+  NSLog(@"%s: indexPath=%@", __func__, indexPath);
+  
+  NSInteger section = [indexPath section];
   NSInteger row = [indexPath row];
   UITableViewCell *cell = nil;
 
-  if (row == 0) {
-    cell = [self orgCellWithLabel: self.name
-                        andDetail: @"foo"
-                        tableView: tableView];
+  if (section == 0) {
+    cell = [self orgCellWithLabel: @"Name"
+                        andDetail: self.name
+                        tableView: theTableView];
   } else {
     cell = [self productCellwithLabel: [[self products] objectAtIndex: row]
-                            andDetail: @"foo"
-                            tableView: tableView];
+                            andDetail: nil
+                            tableView: theTableView];
   }
 
   return cell;
@@ -119,7 +192,7 @@
 #pragma mark -
 #pragma mark Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
     /*
     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];

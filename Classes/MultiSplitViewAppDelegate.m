@@ -8,20 +8,20 @@
 
 #import "MultiSplitViewAppDelegate.h"
 
-
 #import "ViewRegistry.h"
 #import "NXDataLoader.h"
 
 #import "OrgDetailViewController.h"
 #import "OrgRootViewController.h"
 
-#import "RootViewController.h"
-#import "DetailViewController.h"
-
+@interface MultiSplitViewAppDelegate ()
+-(void)configureRootViews;
+-(void)pushSplitViewControllers:(NSString *)name;
+@end
 
 @implementation MultiSplitViewAppDelegate
 
-@synthesize window, splitViewController, rootViewController, detailViewController;
+@synthesize window, splitViewController;
 
 
 #pragma mark -
@@ -33,14 +33,17 @@
 
   ViewRegistry *registry = [ViewRegistry sharedViewRegistry];
 
-  [registry registerViewController: [[OrgRootViewController alloc] init] forName: @"organization.root"];
-  [registry registerViewController: [[OrgDetailViewController alloc] init] forName: @"organization.detail"];
-  [registry registerViewController: [[DetailViewController alloc] init] forName: @"detail"];
+  [registry registerRootController:[[OrgRootViewController alloc] initWithNibName:@"OrgRootViewController" bundle:nil]
+                           forName:@"organization"];
+  [registry registerDetailController:[[OrgDetailViewController alloc] initWithNibName:@"OrgDetailViewController" bundle:nil]
+                           forName:@"organization"];
 
-  // data loader test
-  id json = [[NXDataLoader sharedLoader] loadBundledJSON:@"organizations"];
-  NSLog(@"%s: json=%@", __func__, json);
-  
+  [self configureRootViews];
+
+  NSLog(@"%s: self.splitViewController.viewControllers=%@", __func__, self.splitViewController.viewControllers);
+  NSLog(@"%s: self.splitViewController.viewControllers 0=%@", __func__, [[self.splitViewController.viewControllers objectAtIndex:0] viewControllers]);
+  NSLog(@"%s: self.splitViewController.viewControllers 1=%@", __func__, [[self.splitViewController.viewControllers objectAtIndex:1] viewControllers]);
+
 
   // Add the split view controller's view to the window and display.
   [self.window addSubview:splitViewController.view];
@@ -49,38 +52,55 @@
   return YES;
 }
 
+#pragma mark -
+#pragma mark Memory management
 
-- (void)applicationWillResignActive:(UIApplication *)application {
-    /*
-     Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-     Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-     */
+-(void)configureRootViews
+{
+  ViewRegistry *registry = [ViewRegistry sharedViewRegistry];
+
+  RootViewController *rootVC = [registry rootControllerForName:@"organization"];
+  NSLog(@"%s: rootVC=%@", __func__, rootVC);
+
+  DetailViewController *detailVC = [registry detailControllerForName:@"organization"];
+  NSLog(@"%s: detailVC=%@", __func__, detailVC);
+  
+  rootVC.detailView = detailVC;
+
+  NSArray *viewControllers = [NSArray arrayWithObjects:
+          [[UINavigationController alloc] initWithRootViewController:rootVC],
+          [[UINavigationController alloc] initWithRootViewController:detailVC],
+          nil];
+
+  self.splitViewController.viewControllers = viewControllers;
+  self.splitViewController.delegate = detailVC;
 }
 
+-(void)pushSplitViewControllers:(NSString *)name
+{
+  ViewRegistry *registry = [ViewRegistry sharedViewRegistry];
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    /*
-     Restart any tasks that were paused (or not yet started) while the application was inactive.
-     */
-}
+  RootViewController *rootVC = [registry rootControllerForName:name];
+  NSLog(@"%s: rootVC=%@", __func__, rootVC);
 
+  DetailViewController *detailVC = [registry detailControllerForName:name];
+  NSLog(@"%s: detailVC=%@", __func__, detailVC);
 
-- (void)applicationWillTerminate:(UIApplication *)application {
-    /*
-     Called when the application is about to terminate.
-     */
+  rootVC.detailView = detailVC;
+  self.splitViewController.delegate = detailVC;
+
+  [[self.splitViewController.viewControllers objectAtIndex:0]
+                                        pushViewController:rootVC
+                                                  animated:YES];
+
+  [[self.splitViewController.viewControllers objectAtIndex:1]
+                                        pushViewController:detailVC
+                                                  animated:YES];
 }
 
 
 #pragma mark -
 #pragma mark Memory management
-
-- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
-    /*
-     Free up as much memory as possible by purging cached data objects that can be recreated (or reloaded from disk) later.
-     */
-}
-
 
 - (void)dealloc {
     [splitViewController release];

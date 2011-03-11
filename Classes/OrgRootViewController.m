@@ -8,18 +8,33 @@
 
 #import "OrgRootViewController.h"
 
+#import "ViewRegistry.h"
+#import "NXDataLoader.h"
+
+@interface OrgRootViewController ()
+-(void)configureView;
+@end
 
 @implementation OrgRootViewController
 
 @synthesize organizations = _organizations;
+@synthesize name = _name;
+@synthesize detailView;
 
 -(void)configure:(NSDictionary *)info
 {
-  NSLog(@"%s", __func__);
+  NSLog(@"%s: info=%@", __func__, info);
 
   NSArray *orgs = [info objectForKey:@"organizations"];
+  NSLog(@"%s: orgs=%@", __func__, orgs);
+
   self.organizations = orgs;
+
+  [self configureView];
 }
+
+#pragma mark -
+#pragma mark initialization
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -29,8 +44,17 @@
   NSLog(@"%s", __func__);
   [super viewDidLoad];
 
-  //NXDataLoader *loader = [NXDataLoader sharedLoader];
-  //[self configure: [loader loadJSONFromBundle:@"organizations"]];
+  self.name = @"Organizations";
+
+  NXDataLoader *loader = [NXDataLoader sharedLoader];
+  [self configure: [loader loadBundledJSON:@"organizations"]];
+}
+
+-(void)configureView
+{
+  self.title = self.name;
+
+  [[self view] reloadData];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -55,7 +79,9 @@
 
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  NSLog(@"%s: indexPath=%@", __func__, indexPath);
 
   static NSString *CellIdentifier = @"Cell";
 
@@ -75,15 +101,15 @@
 #pragma mark -
 #pragma mark Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  // Navigation logic may go here. Create and push another view controller.
-  /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-  // ...
-  // Pass the selected object to the new view controller.
-  [self.navigationController pushViewController:detailViewController animated:YES];
-  [detailViewController release];
-  */
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  NSLog(@"%s", __func__);
+
+  NSInteger row = [indexPath row];
+  NSDictionary *org = [[self organizations] objectAtIndex: row];
+  NSLog(@"%s: org=%@", __func__, org);
+
+  [self.detailView configure:org];
 }
 
 
@@ -91,22 +117,15 @@
 #pragma mark Memory management
 
 - (void)didReceiveMemoryWarning {
-  // Releases the view if it doesn't have a superview.
   [super didReceiveMemoryWarning];
-
-  // Relinquish ownership any cached data, images, etc. that aren't in use.
 }
 
 - (void)viewDidUnload {
-  // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-  // For example: self.myOutlet = nil;
 }
-
 
 - (void)dealloc {
   [super dealloc];
 }
-
 
 @end
 

@@ -7,7 +7,26 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
+//@protocol ConfigurableViewController <NSObject>
+
+//-(void)configure:(NSDictionary *)info;
+
+//@end
+//
+
+
+@interface DetailViewController : UIViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate> {
+}
+-(void)configure:(NSDictionary *)info;
+@end
+
+@interface RootViewController : UIViewController {
+}
+@property (nonatomic, retain) DetailViewController *detailView;
+-(void)configure:(NSDictionary *)info;
+@end
 
 @interface ViewRegistry : NSObject {
 	NSMutableDictionary *_registry;
@@ -17,8 +36,16 @@
 
 +(ViewRegistry *)sharedViewRegistry;
 
--(void)registerViewController:(id)controller forName:(NSString *)name;
--(id)controllerForName:(NSString *)name;
+// Single Controllers
+-(void)registerViewController:(UIViewController *)controller forName:(NSString *)name;
+-(UIViewController *)controllerForName:(NSString *)name;
+
+// Root/Detail VCs
+- (void)registerRootController:(RootViewController *)controller forName:(NSString *)name;
+- (void)registerDetailController:(DetailViewController *)controller forName:(NSString *)name;
+
+-(RootViewController *)rootControllerForName:(NSString *)name;
+-(DetailViewController *)detailControllerForName:(NSString *)name;
 
 @end
 
