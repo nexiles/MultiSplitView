@@ -118,9 +118,9 @@
                                         pushViewController:rootVC
                                                   animated:YES];
 
-  [[self.splitViewController.viewControllers objectAtIndex:1]
-                                        pushViewController:detailVC
-                                                  animated:YES];
+  //[[self.splitViewController.viewControllers objectAtIndex:1]
+                                        //pushViewController:detailVC
+                                                  //animated:YES];
 
 }
 

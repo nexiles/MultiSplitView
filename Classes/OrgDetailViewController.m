@@ -203,10 +203,10 @@ enum {
   NSInteger section = [indexPath section];
   NSInteger row     = [indexPath row];
   if (section == kProductsSection) {
-    NSDictionary *product = [[self products] objectAtIndex:row];
+    NSDictionary *products = [NSDictionary dictionaryWithObjectsAndKeys: [self products], @"products", nil];
     NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
       @"product", @"controller_name",
-      product, @"data",
+      products, @"data",
       nil];
     NSNotification *note = [NSNotification notificationWithName:@"push_notification"
                                                          object:self
