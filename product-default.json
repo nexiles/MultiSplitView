@@ -1,0 +1,21 @@
+{
+    "name": "Default Product",
+    "oid":  "OR:wt.pdmlink.PDMLinkProduct:444444",
+    "owner": "Fred Kaputnik",
+    "epm_documents": [
+        {
+            "cadname": "washer.prt", 
+            "name": "Washer", 
+            "number": "12345", 
+	    "version": "A.1",
+            "oid": "OR:wt.epm.EPMDocument:08154711"
+        }, 
+        {
+            "cadname": "pulley.prt", 
+            "name": "Pulley", 
+            "number": "987565", 
+	    "version": "C.12",
+            "oid": "OR:wt.epm.EPMDocument:1233123"
+        }
+    ]
+}

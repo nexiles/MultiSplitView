@@ -26,6 +26,11 @@
 		BF5C51F513281D3C000BB093 /* NXDataLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5C51F413281D3C000BB093 /* NXDataLoader.m */; };
 		BF5C523E1328232F000BB093 /* organizations.json in Resources */ = {isa = PBXBuildFile; fileRef = BF5C5222132821B3000BB093 /* organizations.json */; };
 		BF5C52B41328CF6C000BB093 /* organization-default.json in Resources */ = {isa = PBXBuildFile; fileRef = BF5C52B31328CF6C000BB093 /* organization-default.json */; };
+		BF7035AF132A1F6B00DA6F71 /* ProductRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7035AD132A1F6B00DA6F71 /* ProductRootViewController.m */; };
+		BF7035B0132A1F6B00DA6F71 /* ProductRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF7035AE132A1F6B00DA6F71 /* ProductRootViewController.xib */; };
+		BF7035B4132A1F8100DA6F71 /* ProductDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7035B2132A1F8100DA6F71 /* ProductDetailViewController.m */; };
+		BF7035B5132A1F8100DA6F71 /* ProductDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF7035B3132A1F8100DA6F71 /* ProductDetailViewController.xib */; };
+		BF7035E9132A28D200DA6F71 /* product-default.json in Resources */ = {isa = PBXBuildFile; fileRef = BF7035E8132A28D200DA6F71 /* product-default.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +67,13 @@
 		BF5C51F413281D3C000BB093 /* NXDataLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXDataLoader.m; sourceTree = "<group>"; };
 		BF5C5222132821B3000BB093 /* organizations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = organizations.json; sourceTree = "<group>"; };
 		BF5C52B31328CF6C000BB093 /* organization-default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "organization-default.json"; sourceTree = "<group>"; };
+		BF7035AC132A1F6B00DA6F71 /* ProductRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductRootViewController.h; sourceTree = "<group>"; };
+		BF7035AD132A1F6B00DA6F71 /* ProductRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductRootViewController.m; sourceTree = "<group>"; };
+		BF7035AE132A1F6B00DA6F71 /* ProductRootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ProductRootViewController.xib; path = Classes/ProductRootViewController.xib; sourceTree = "<group>"; };
+		BF7035B1132A1F8100DA6F71 /* ProductDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductDetailViewController.h; sourceTree = "<group>"; };
+		BF7035B2132A1F8100DA6F71 /* ProductDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductDetailViewController.m; sourceTree = "<group>"; };
+		BF7035B3132A1F8100DA6F71 /* ProductDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ProductDetailViewController.xib; path = Classes/ProductDetailViewController.xib; sourceTree = "<group>"; };
+		BF7035E8132A28D200DA6F71 /* product-default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "product-default.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +137,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BF7035E8132A28D200DA6F71 /* product-default.json */,
+				BF7035AE132A1F6B00DA6F71 /* ProductRootViewController.xib */,
+				BF7035B3132A1F8100DA6F71 /* ProductDetailViewController.xib */,
 				BF5C52B31328CF6C000BB093 /* organization-default.json */,
 				BF5C5173132807DB000BB093 /* OrgDetailViewController.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
@@ -152,6 +167,10 @@
 				BF5C5172132807DB000BB093 /* OrgDetailViewController.m */,
 				BF5C51C113281669000BB093 /* OrgRootViewController.h */,
 				BF5C51C213281669000BB093 /* OrgRootViewController.m */,
+				BF7035AC132A1F6B00DA6F71 /* ProductRootViewController.h */,
+				BF7035AD132A1F6B00DA6F71 /* ProductRootViewController.m */,
+				BF7035B1132A1F8100DA6F71 /* ProductDetailViewController.h */,
+				BF7035B2132A1F8100DA6F71 /* ProductDetailViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -229,6 +248,9 @@
 				BF5C5175132807DB000BB093 /* OrgDetailViewController.xib in Resources */,
 				BF5C51C513281669000BB093 /* OrgRootViewController.xib in Resources */,
 				BF5C52B41328CF6C000BB093 /* organization-default.json in Resources */,
+				BF7035B0132A1F6B00DA6F71 /* ProductRootViewController.xib in Resources */,
+				BF7035B5132A1F8100DA6F71 /* ProductDetailViewController.xib in Resources */,
+				BF7035E9132A28D200DA6F71 /* product-default.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +272,8 @@
 				BF5C51D813281A11000BB093 /* SBJsonParser.m in Sources */,
 				BF5C51D913281A11000BB093 /* SBJsonWriter.m in Sources */,
 				BF5C51F513281D3C000BB093 /* NXDataLoader.m in Sources */,
+				BF7035AF132A1F6B00DA6F71 /* ProductRootViewController.m in Sources */,
+				BF7035B4132A1F8100DA6F71 /* ProductDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

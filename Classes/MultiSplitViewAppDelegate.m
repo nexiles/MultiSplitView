@@ -13,6 +13,8 @@
 
 #import "OrgDetailViewController.h"
 #import "OrgRootViewController.h"
+#import "ProductDetailViewController.h"
+#import "ProductRootViewController.h"
 
 @interface MultiSplitViewAppDelegate ()
 -(void)configureRootViews;
@@ -37,6 +39,11 @@
                            forName:@"organization"];
   [registry registerDetailController:[[OrgDetailViewController alloc] initWithNibName:@"OrgDetailViewController" bundle:nil]
                            forName:@"organization"];
+
+  [registry registerRootController:[[ProductRootViewController alloc] initWithNibName:@"ProductRootViewController" bundle:nil]
+                           forName:@"product"];
+  [registry registerDetailController:[[ProductDetailViewController alloc] initWithNibName:@"ProductDetailViewController" bundle:nil]
+                           forName:@"product"];
 
   [self configureRootViews];
 

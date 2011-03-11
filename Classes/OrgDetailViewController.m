@@ -7,6 +7,7 @@
 //
 
 #import "OrgDetailViewController.h"
+#import "ViewRegistry.h"
 #import "NXDataLoader.h"
 
 @interface OrgDetailViewController ()
@@ -201,6 +202,10 @@
     [self.navigationController pushViewController:detailViewController animated:YES];
     [detailViewController release];
     */
+
+  ViewRegistry *registry = [ViewRegistry sharedViewRegistry];
+  [self.navigationController pushViewController:[registry detailControllerForName:@"product"]
+                                       animated:YES];
 }
 
 
