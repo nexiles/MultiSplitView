@@ -225,8 +225,12 @@
 }
 
 
-- (void)dealloc {
-    [super dealloc];
+- (void)dealloc
+{
+  self.products = nil;
+  self.name = nil;
+
+  [super dealloc];
 }
 
 

@@ -120,10 +120,15 @@
   [super didReceiveMemoryWarning];
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
+  self.name = nil;
+  self.organizations = nil;
 }
 
 - (void)dealloc {
+  self.name = nil;
+  self.organizations = nil;
   [super dealloc];
 }
 
