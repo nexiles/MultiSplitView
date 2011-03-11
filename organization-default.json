@@ -1,8 +1,8 @@
 {
     "name": "Nexiles", 
-    "products": [
-	"Product A", 
-	"Product B", 
-	"Product C"
+	    "products": [
+	    { "name": "Product A", "oid": "OR:wt.pdmlink.PDMLinkProduct:123" },
+	    { "name": "Product B", "oid": "OR:wt.pdmlink.PDMLinkProduct:123" },
+	    { "name": "Product C", "oid": "OR:wt.pdmlink.PDMLinkProduct:123" }
     ]
 }
