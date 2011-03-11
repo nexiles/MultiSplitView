@@ -9,18 +9,20 @@
 #import <UIKit/UIKit.h>
 
 
-@interface OrgDetailViewController : UITableViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate> {
+@interface OrgDetailViewController : UIViewController <UISplitViewControllerDelegate> {
 
-  NSString             * _name;
-  NSArray              * _products;
+  NSString    * _name;
+  NSArray     * _products;
 
-  IBOutlet UITableView * tableView;
+  UIToolbar   * _toolBar;
+  UITableView * _tableView;
 }
 
 @property (nonatomic, retain) NSString    * name;
 @property (nonatomic, retain) NSArray     * products;
 
-@property (nonatomic, retain) UITableView * tableView;
+@property (nonatomic, retain) IBOutlet UITableView * tableView;
+@property (nonatomic, retain) IBOutlet UIToolbar   * toolBar;
 
 -(void)configure:(NSDictionary *)info;
 

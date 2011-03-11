@@ -54,7 +54,7 @@
 {
   self.title = self.name;
 
-  [[self view] reloadData];
+  [[self tableView] reloadData];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

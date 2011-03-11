@@ -23,10 +23,12 @@ enum {
 
 @implementation OrgDetailViewController
 
-@synthesize name     = _name;
-@synthesize products = _products;
+@synthesize name      = _name;
+@synthesize products  = _products;
+@synthesize tableView = _tableView;
+@synthesize toolBar   = _toolBar;
+
 @synthesize popoverController;
-@synthesize tableView;
 
 -(void)configure:(NSDictionary *)info
 {
@@ -72,11 +74,41 @@ enum {
 #pragma mark -
 #pragma mark Split View Controller Delegate
 
+ 
+- (void)splitViewController: (UISplitViewController*)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem*)barButtonItem forPopoverController: (UIPopoverController*)pc {
+    
+    barButtonItem.title = @"Root List";
+    NSMutableArray *items = [self.toolBar.items mutableCopy];
+    [items insertObject:barButtonItem atIndex:0];
+    [[self toolBar] setItems:items animated:YES];
+    [items release];
+    self.popoverController = pc;
+}
+
+
+// Called when the view is shown again in the split view, invalidating the button and popover controller.
+- (void)splitViewController: (UISplitViewController*)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem {
+    
+    NSMutableArray *items = [[[self toolBar] items] mutableCopy];
+    [items removeObjectAtIndex:0];
+    [[self toolBar] setItems:items animated:YES];
+    [items release];
+    self.popoverController = nil;
+}
+
+
+/*
 - (void)splitViewController:(UISplitViewController*)svc
      willHideViewController:(UIViewController *)aViewController
           withBarButtonItem:(UIBarButtonItem*)barButtonItem
        forPopoverController:(UIPopoverController*)pc
 {
+  NSLog(@"%s", __func__);
+  NSLog(@"%s: aViewController=%@", __func__, aViewController);
+  NSLog(@"%s: barButtonItem=%@", __func__, barButtonItem);
+  
+  NSLog(@"%s: pc=%@", __func__, pc);
+  
   [barButtonItem setTitle:@"Organizations"];
   [[self navigationItem] setLeftBarButtonItem:barButtonItem];
   [self setPopoverController:pc];
@@ -87,9 +119,11 @@ enum {
      willShowViewController:(UIViewController *)aViewController
   invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
+  NSLog(@"%s", __func__);
   [[self navigationItem] setLeftBarButtonItem:nil];
   [self setPopoverController:nil];
 }
+*/
 
 
 #pragma mark -
@@ -201,7 +235,6 @@ enum {
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   NSInteger section = [indexPath section];
-  NSInteger row     = [indexPath row];
   if (section == kProductsSection) {
     NSDictionary *products = [NSDictionary dictionaryWithObjectsAndKeys: [self products], @"products", nil];
     NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:

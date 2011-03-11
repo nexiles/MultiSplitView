@@ -50,7 +50,7 @@
 
   NSLog(@"%s: self.splitViewController.viewControllers=%@", __func__, self.splitViewController.viewControllers);
   NSLog(@"%s: self.splitViewController.viewControllers 0=%@", __func__, [[self.splitViewController.viewControllers objectAtIndex:0] viewControllers]);
-  NSLog(@"%s: self.splitViewController.viewControllers 1=%@", __func__, [[self.splitViewController.viewControllers objectAtIndex:1] viewControllers]);
+  NSLog(@"%s: self.splitViewController.viewControllers 1=%@", __func__, [self.splitViewController.viewControllers objectAtIndex:1]);
 
   // Register for "push" View Controller notifications
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -59,7 +59,6 @@
   // Add the split view controller's view to the window and display.
   [self.window addSubview:splitViewController.view];
   [self.window makeKeyAndVisible];
-
   return YES;
 }
 
@@ -80,19 +79,20 @@
 
 -(void)configureRootViews
 {
+  NSLog(@"%s", __func__);
   ViewRegistry *registry = [ViewRegistry sharedViewRegistry];
 
   RootViewController *rootVC = [registry rootControllerForName:@"organization"];
-  NSLog(@"%s: rootVC=%@", __func__, rootVC);
-
   DetailViewController *detailVC = [registry detailControllerForName:@"organization"];
-  NSLog(@"%s: detailVC=%@", __func__, detailVC);
   
+  // hook view controllers
   rootVC.detailView = detailVC;
 
+  // Configure Split view with an UINavigationController and a detail view
+  self.splitViewController = [[[UISplitViewController alloc] init] autorelease];
   NSArray *viewControllers = [NSArray arrayWithObjects:
           [[UINavigationController alloc] initWithRootViewController:rootVC],
-          [[UINavigationController alloc] initWithRootViewController:detailVC],
+          detailVC,
           nil];
 
   self.splitViewController.viewControllers = viewControllers;
@@ -101,6 +101,8 @@
 
 -(void)pushSplitViewControllers:(NSString *)name withData:(NSDictionary *)data
 {
+  NSLog(@"%s", __func__);
+ 
   // fetch VCs from registry
   ViewRegistry *registry = [ViewRegistry sharedViewRegistry];
   RootViewController *rootVC = [registry rootControllerForName:name];
