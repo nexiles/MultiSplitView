@@ -3,25 +3,25 @@
         {
             "name": "Nexiles", 
             "products": [
-                "Product A", 
-                "Product B", 
-                "Product C"
+                { "name": "Product A", "oid": "OR:wt.pdmlink.PDMLinkProduct:123" },
+                { "name": "Product B", "oid": "OR:wt.pdmlink.PDMLinkProduct:123" },
+                { "name": "Product C", "oid": "OR:wt.pdmlink.PDMLinkProduct:123" }
             ]
         }, 
         {
             "name": "Demo Orga", 
             "products": [
-                "Product X", 
-                "Product Y", 
-                "Product Z"
+                { "name": "Product X", "oid": "OR:wt.pdmlink.PDMLinkProduct:123" },
+                { "name": "Product Y", "oid": "OR:wt.pdmlink.PDMLinkProduct:123" },
+                { "name": "Product Z", "oid": "OR:wt.pdmlink.PDMLinkProduct:123" }
             ]
         }, 
         {
             "name": "Another Orga", 
             "products": [
-                "Product 1", 
-                "Product 2", 
-                "Product 3"
+                { "name": "Product 1", "oid": "OR:wt.pdmlink.PDMLinkProduct:123" },
+                { "name": "Product 2", "oid": "OR:wt.pdmlink.PDMLinkProduct:123" },
+                { "name": "Product 3", "oid": "OR:wt.pdmlink.PDMLinkProduct:123" }
             ]
         }
     ]

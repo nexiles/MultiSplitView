@@ -18,7 +18,8 @@
 
 @interface MultiSplitViewAppDelegate ()
 -(void)configureRootViews;
--(void)pushSplitViewControllers:(NSString *)name;
+-(void)pushSplitViewControllers:(NSString *)name withData:(NSDictionary *)data;
+-(void)pushNotification:(NSNotification *)note;
 @end
 
 @implementation MultiSplitViewAppDelegate
@@ -51,6 +52,9 @@
   NSLog(@"%s: self.splitViewController.viewControllers 0=%@", __func__, [[self.splitViewController.viewControllers objectAtIndex:0] viewControllers]);
   NSLog(@"%s: self.splitViewController.viewControllers 1=%@", __func__, [[self.splitViewController.viewControllers objectAtIndex:1] viewControllers]);
 
+  // Register for "push" View Controller notifications
+  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+  [nc addObserver:self selector:@selector(pushNotification:) name:@"push_notification" object:nil];
 
   // Add the split view controller's view to the window and display.
   [self.window addSubview:splitViewController.view];
@@ -60,7 +64,19 @@
 }
 
 #pragma mark -
-#pragma mark Memory management
+#pragma mark Split View Controller handling
+
+-(void)pushNotification:(NSNotification *)note
+{
+  NSLog(@"%s: note=%@", __func__, note);
+
+  NSDictionary *info = [note userInfo];
+
+  NSString *controller_name = [info objectForKey:@"controller_name"];
+  NSDictionary *data        = [info objectForKey:@"data"];
+
+  [self pushSplitViewControllers:controller_name withData:data];
+}
 
 -(void)configureRootViews
 {
@@ -83,26 +99,29 @@
   self.splitViewController.delegate = detailVC;
 }
 
--(void)pushSplitViewControllers:(NSString *)name
+-(void)pushSplitViewControllers:(NSString *)name withData:(NSDictionary *)data
 {
+  // fetch VCs from registry
   ViewRegistry *registry = [ViewRegistry sharedViewRegistry];
-
   RootViewController *rootVC = [registry rootControllerForName:name];
-  NSLog(@"%s: rootVC=%@", __func__, rootVC);
-
   DetailViewController *detailVC = [registry detailControllerForName:name];
-  NSLog(@"%s: detailVC=%@", __func__, detailVC);
 
+  // hook them
   rootVC.detailView = detailVC;
   self.splitViewController.delegate = detailVC;
 
+  // configure with data
+  [rootVC configure:data];
+
+  // configur SplitController's UINavigationController
   [[self.splitViewController.viewControllers objectAtIndex:0]
                                         pushViewController:rootVC
                                                   animated:YES];
 
-  [[self.splitViewController.viewControllers objectAtIndex:1]
-                                        pushViewController:detailVC
-                                                  animated:YES];
+  //[[self.splitViewController.viewControllers objectAtIndex:1]
+                                        //pushViewController:detailVC
+                                                  //animated:YES];
+
 }
 
 
@@ -110,9 +129,11 @@
 #pragma mark Memory management
 
 - (void)dealloc {
-    [splitViewController release];
-    [window release];
-    [super dealloc];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+  [splitViewController release];
+  [window release];
+  [super dealloc];
 }
 
 
