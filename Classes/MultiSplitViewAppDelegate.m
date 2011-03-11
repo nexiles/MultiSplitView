@@ -14,6 +14,10 @@
 #import "OrgDetailViewController.h"
 #import "OrgRootViewController.h"
 
+@interface MultiSplitViewAppDelegate ()
+-(void)configureRootViews;
+-(void)pushSplitViewControllers:(NSString *)name;
+@end
 
 @implementation MultiSplitViewAppDelegate
 
@@ -27,29 +31,71 @@
 {
   NSLog(@"%s", __func__);
 
-  //ViewRegistry *registry = [ViewRegistry sharedViewRegistry];
+  ViewRegistry *registry = [ViewRegistry sharedViewRegistry];
 
-  //[registry registerViewController: [[OrgRootViewController alloc] init] forName: @"organization.root"];
-  //[registry registerViewController: [[OrgDetailViewController alloc] init] forName: @"organization.detail"];
+  [registry registerRootController:[[OrgRootViewController alloc] initWithNibName:@"OrgRootViewController" bundle:nil]
+                           forName:@"organization"];
+  [registry registerDetailController:[[OrgDetailViewController alloc] initWithNibName:@"OrgDetailViewController" bundle:nil]
+                           forName:@"organization"];
 
-
-  //NSArray *viewControllers = [NSArray arrayWithObjects:
-          //[registry controllerForName:@"organization.root"],
-          //[registry controllerForName:@"organization.detail"],
-          //nil];
-
-  //self.splitViewController.viewControllers = viewControllers;
+  [self configureRootViews];
 
   NSLog(@"%s: self.splitViewController.viewControllers=%@", __func__, self.splitViewController.viewControllers);
   NSLog(@"%s: self.splitViewController.viewControllers 0=%@", __func__, [[self.splitViewController.viewControllers objectAtIndex:0] viewControllers]);
   NSLog(@"%s: self.splitViewController.viewControllers 1=%@", __func__, [[self.splitViewController.viewControllers objectAtIndex:1] viewControllers]);
-  
+
 
   // Add the split view controller's view to the window and display.
   [self.window addSubview:splitViewController.view];
   [self.window makeKeyAndVisible];
 
   return YES;
+}
+
+#pragma mark -
+#pragma mark Memory management
+
+-(void)configureRootViews
+{
+  ViewRegistry *registry = [ViewRegistry sharedViewRegistry];
+
+  RootViewController *rootVC = [registry rootControllerForName:@"organization"];
+  NSLog(@"%s: rootVC=%@", __func__, rootVC);
+
+  DetailViewController *detailVC = [registry detailControllerForName:@"organization"];
+  NSLog(@"%s: detailVC=%@", __func__, detailVC);
+  
+  rootVC.detailView = detailVC;
+
+  NSArray *viewControllers = [NSArray arrayWithObjects:
+          [[UINavigationController alloc] initWithRootViewController:rootVC],
+          [[UINavigationController alloc] initWithRootViewController:detailVC],
+          nil];
+
+  self.splitViewController.viewControllers = viewControllers;
+  self.splitViewController.delegate = detailVC;
+}
+
+-(void)pushSplitViewControllers:(NSString *)name
+{
+  ViewRegistry *registry = [ViewRegistry sharedViewRegistry];
+
+  RootViewController *rootVC = [registry rootControllerForName:name];
+  NSLog(@"%s: rootVC=%@", __func__, rootVC);
+
+  DetailViewController *detailVC = [registry detailControllerForName:name];
+  NSLog(@"%s: detailVC=%@", __func__, detailVC);
+
+  rootVC.detailView = detailVC;
+  self.splitViewController.delegate = detailVC;
+
+  [[self.splitViewController.viewControllers objectAtIndex:0]
+                                        pushViewController:rootVC
+                                                  animated:YES];
+
+  [[self.splitViewController.viewControllers objectAtIndex:1]
+                                        pushViewController:detailVC
+                                                  animated:YES];
 }
 
 

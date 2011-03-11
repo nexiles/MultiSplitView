@@ -23,8 +23,8 @@
 
 -(void)configure:(NSDictionary *)info
 {
-  NSLog(@"%s", __func__);
-
+  NSLog(@"%s: self=%@", __func__, self);
+  
   self.name = [info objectForKey:@"name"];
   self.products = [info objectForKey:@"products"];
 
@@ -39,7 +39,7 @@
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
-  NSLog(@"%s", __func__);
+  NSLog(@"%s: self=%@", __func__, self);
   [super viewDidLoad];
 
   // load default org
@@ -88,17 +88,17 @@
 #pragma mark -
 #pragma mark Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
     // Return the number of sections.
     return 2;
 }
 
-//- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+//- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)theTableView
 //{
   //return [NSArray arrayWithObjects: @"Organization details", @"Products", nil];
 //}
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+- (NSString *)tableView:(UITableView *)theTableView titleForHeaderInSection:(NSInteger)section
 {
   switch (section) {
     case 0:
@@ -112,7 +112,7 @@
 }
 
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section
 {
   NSLog(@"%s", __func__);
 
@@ -128,12 +128,12 @@
   }
 }
 
--(UITableViewCell *)productCellwithLabel:(NSString *)label andDetail:(NSString *)detail tableView:(UITableView *)tableView
+-(UITableViewCell *)productCellwithLabel:(NSString *)label andDetail:(NSString *)detail tableView:(UITableView *)theTableView
 {
   NSLog(@"%s", __func__);
   static NSString *CellIdentifier = @"ProductCell";
 
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  UITableViewCell *cell = [theTableView dequeueReusableCellWithIdentifier:CellIdentifier];
   if (cell == nil) {
     cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                    reuseIdentifier:CellIdentifier] autorelease];
@@ -147,12 +147,12 @@
   return cell;
 }
 
--(UITableViewCell *)orgCellWithLabel:(NSString *)label andDetail:(NSString *)detail tableView:(UITableView *)tableView
+-(UITableViewCell *)orgCellWithLabel:(NSString *)label andDetail:(NSString *)detail tableView:(UITableView *)theTableView
 {
   NSLog(@"%s", __func__);
   static NSString *CellIdentifier = @"OrgCell";
 
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  UITableViewCell *cell = [theTableView dequeueReusableCellWithIdentifier:CellIdentifier];
   if (cell == nil) {
     cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
                                    reuseIdentifier:CellIdentifier] autorelease];
@@ -167,8 +167,9 @@
 }
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  NSLog(@"%s: self=%@", __func__, self);
   NSLog(@"%s: indexPath=%@", __func__, indexPath);
   
   NSInteger section = [indexPath section];
@@ -178,11 +179,11 @@
   if (section == 0) {
     cell = [self orgCellWithLabel: @"Name"
                         andDetail: self.name
-                        tableView: tableView];
+                        tableView: theTableView];
   } else {
     cell = [self productCellwithLabel: [[self products] objectAtIndex: row]
                             andDetail: nil
-                            tableView: tableView];
+                            tableView: theTableView];
   }
 
   return cell;
@@ -191,7 +192,7 @@
 #pragma mark -
 #pragma mark Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
     /*
     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
