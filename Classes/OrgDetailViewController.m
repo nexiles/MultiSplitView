@@ -16,20 +16,11 @@ enum {
   kMaxSections // last
 };
 
-@interface OrgDetailViewController ()
--(void)configureView;
-@property (nonatomic, retain) UIPopoverController *popoverController;
-@end
 
 @implementation OrgDetailViewController
 
 @synthesize name      = _name;
-@synthesize data      = _data;
 @synthesize products  = _products;
-@synthesize tableView = _tableView;
-@synthesize toolBar   = _toolBar;
-
-@synthesize popoverController;
 
 -(void)configure
 {
@@ -42,7 +33,8 @@ enum {
     [self.popoverController dismissPopoverAnimated:YES];
   }
 
-  [self configureView];
+  self.title = self.name;
+  [[self tableView] reloadData];
 }
 
 #pragma mark -
@@ -62,19 +54,7 @@ enum {
 {
   NSLog(@"%s", __func__);
   [super viewWillAppear:animated];
-  [self configureView];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Override to allow orientations other than the default portrait orientation.
-    return YES;
-}
-
-- (void)configureView
-{
-   //NSLog(@"%s", __func__);
-   self.title = self.name;
-   [[self tableView] reloadData];
+  [self configure];
 }
 
 #pragma mark -
@@ -247,7 +227,7 @@ enum {
               indexPath, @"selection",
               nil];
     NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
-              @"product", @"controller_name",
+              self.controllerName, @"controller_name",
               products, @"data",
               nil];
     NSNotification *note = [NSNotification notificationWithName:@"new_root_controller"
@@ -262,17 +242,11 @@ enum {
 #pragma mark Memory management
 
 - (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-
-    // Relinquish ownership any cached data, images, etc. that aren't in use.
 }
 
 - (void)viewDidUnload {
-    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
 }
-
 
 - (void)dealloc
 {

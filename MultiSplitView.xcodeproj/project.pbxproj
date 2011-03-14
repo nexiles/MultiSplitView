@@ -31,6 +31,8 @@
 		BF7035B4132A1F8100DA6F71 /* ProductDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7035B2132A1F8100DA6F71 /* ProductDetailViewController.m */; };
 		BF7035B5132A1F8100DA6F71 /* ProductDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF7035B3132A1F8100DA6F71 /* ProductDetailViewController.xib */; };
 		BF7035E9132A28D200DA6F71 /* product-default.json in Resources */ = {isa = PBXBuildFile; fileRef = BF7035E8132A28D200DA6F71 /* product-default.json */; };
+		BFA32766132E7E3400A1E6C1 /* BaseRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA32765132E7E3400A1E6C1 /* BaseRootViewController.m */; };
+		BFA32814132E8E2D00A1E6C1 /* BaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA32813132E8E2D00A1E6C1 /* BaseDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +76,10 @@
 		BF7035B2132A1F8100DA6F71 /* ProductDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductDetailViewController.m; sourceTree = "<group>"; };
 		BF7035B3132A1F8100DA6F71 /* ProductDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ProductDetailViewController.xib; path = Classes/ProductDetailViewController.xib; sourceTree = "<group>"; };
 		BF7035E8132A28D200DA6F71 /* product-default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "product-default.json"; sourceTree = "<group>"; };
+		BFA32764132E7E3400A1E6C1 /* BaseRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRootViewController.h; sourceTree = "<group>"; };
+		BFA32765132E7E3400A1E6C1 /* BaseRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRootViewController.m; sourceTree = "<group>"; };
+		BFA32812132E8E2D00A1E6C1 /* BaseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseDetailViewController.h; sourceTree = "<group>"; };
+		BFA32813132E8E2D00A1E6C1 /* BaseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,11 +101,8 @@
 			children = (
 				1D3623240D0F684500981E51 /* MultiSplitViewAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MultiSplitViewAppDelegate.m */,
-				BF5C51211327FFFD000BB093 /* ViewRegistry.h */,
-				BF5C51221327FFFD000BB093 /* ViewRegistry.m */,
 				BF5C5176132807F5000BB093 /* View Controllers */,
-				BF5C51F313281D3C000BB093 /* NXDataLoader.h */,
-				BF5C51F413281D3C000BB093 /* NXDataLoader.m */,
+				BFA32763132E7DCA00A1E6C1 /* Support */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -171,6 +174,10 @@
 				BF7035AD132A1F6B00DA6F71 /* ProductRootViewController.m */,
 				BF7035B1132A1F8100DA6F71 /* ProductDetailViewController.h */,
 				BF7035B2132A1F8100DA6F71 /* ProductDetailViewController.m */,
+				BFA32764132E7E3400A1E6C1 /* BaseRootViewController.h */,
+				BFA32765132E7E3400A1E6C1 /* BaseRootViewController.m */,
+				BFA32812132E8E2D00A1E6C1 /* BaseDetailViewController.h */,
+				BFA32813132E8E2D00A1E6C1 /* BaseDetailViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -191,6 +198,17 @@
 				BF5C51D413281A11000BB093 /* SBJsonWriter.m */,
 			);
 			name = SBJSON;
+			sourceTree = "<group>";
+		};
+		BFA32763132E7DCA00A1E6C1 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				BF5C51211327FFFD000BB093 /* ViewRegistry.h */,
+				BF5C51221327FFFD000BB093 /* ViewRegistry.m */,
+				BF5C51F313281D3C000BB093 /* NXDataLoader.h */,
+				BF5C51F413281D3C000BB093 /* NXDataLoader.m */,
+			);
+			name = Support;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,6 +292,8 @@
 				BF5C51F513281D3C000BB093 /* NXDataLoader.m in Sources */,
 				BF7035AF132A1F6B00DA6F71 /* ProductRootViewController.m in Sources */,
 				BF7035B4132A1F8100DA6F71 /* ProductDetailViewController.m in Sources */,
+				BFA32766132E7E3400A1E6C1 /* BaseRootViewController.m in Sources */,
+				BFA32814132E8E2D00A1E6C1 /* BaseDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

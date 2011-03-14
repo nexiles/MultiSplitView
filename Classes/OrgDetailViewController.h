@@ -8,23 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+#import "BaseDetailViewController.h"
 
-@interface OrgDetailViewController : UIViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate> {
-
+@interface OrgDetailViewController : BaseDetailViewController {
   NSString    * _name;
   NSArray     * _products;
-    NSDictionary * _data;
-
-  UIToolbar   * _toolBar;
-  UITableView * _tableView;
 }
 
 @property (nonatomic, retain) NSString    * name;
 @property (nonatomic, retain) NSArray     * products;
-@property (nonatomic, retain) NSDictionary    * data;
-
-@property (nonatomic, retain) IBOutlet UITableView * tableView;
-@property (nonatomic, retain) IBOutlet UIToolbar   * toolBar;
 
 -(void)configure;
 
