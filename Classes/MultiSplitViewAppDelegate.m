@@ -19,7 +19,8 @@
 @interface MultiSplitViewAppDelegate ()
 -(void)configureRootViews;
 -(void)pushSplitViewControllers:(NSString *)name withData:(NSDictionary *)data;
--(void)pushNotification:(NSNotification *)note;
+-(void)newRootController:(NSNotification *)note;
+-(void)newDetailController:(NSNotification *)note;
 @end
 
 @implementation MultiSplitViewAppDelegate
@@ -50,23 +51,23 @@
 
   NSLog(@"%s: self.splitViewController.viewControllers=%@", __func__, self.splitViewController.viewControllers);
   NSLog(@"%s: self.splitViewController.viewControllers 0=%@", __func__, [[self.splitViewController.viewControllers objectAtIndex:0] viewControllers]);
-  NSLog(@"%s: self.splitViewController.viewControllers 1=%@", __func__, [[self.splitViewController.viewControllers objectAtIndex:1] viewControllers]);
+  NSLog(@"%s: self.splitViewController.viewControllers 1=%@", __func__, [self.splitViewController.viewControllers objectAtIndex:1]);
 
   // Register for "push" View Controller notifications
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-  [nc addObserver:self selector:@selector(pushNotification:) name:@"push_notification" object:nil];
+  [nc addObserver:self selector:@selector(newRootController:) name:@"new_root_controller" object:nil];
+  [nc addObserver:self selector:@selector(newDetailController:) name:@"new_detail_controller" object:nil];
 
   // Add the split view controller's view to the window and display.
   [self.window addSubview:splitViewController.view];
   [self.window makeKeyAndVisible];
-
   return YES;
 }
 
 #pragma mark -
 #pragma mark Split View Controller handling
 
--(void)pushNotification:(NSNotification *)note
+-(void)newRootController:(NSNotification *)note
 {
   NSLog(@"%s: note=%@", __func__, note);
 
@@ -78,29 +79,56 @@
   [self pushSplitViewControllers:controller_name withData:data];
 }
 
+-(void)newDetailController:(NSNotification *)note
+{
+  NSLog(@"%s: note=%@", __func__, note);
+
+  NSDictionary *info = [note userInfo];
+
+  NSString *controller_name = [info objectForKey:@"controller_name"];
+
+  ViewRegistry *registry         = [ViewRegistry sharedViewRegistry];
+  DetailViewController *detailVC = [registry detailControllerForName:controller_name];
+
+  self.splitViewController.delegate = detailVC;
+
+  if (detailVC != [[self.splitViewController.viewControllers objectAtIndex:1] topViewController]) {
+    [[self.splitViewController.viewControllers objectAtIndex:1] pushViewController:detailVC animated:YES];
+  }
+}
+
 -(void)configureRootViews
 {
+  NSLog(@"%s", __func__);
   ViewRegistry *registry = [ViewRegistry sharedViewRegistry];
 
   RootViewController *rootVC = [registry rootControllerForName:@"organization"];
-  NSLog(@"%s: rootVC=%@", __func__, rootVC);
-
   DetailViewController *detailVC = [registry detailControllerForName:@"organization"];
-  NSLog(@"%s: detailVC=%@", __func__, detailVC);
-  
+
+  // hook view controllers
   rootVC.detailView = detailVC;
 
-  NSArray *viewControllers = [NSArray arrayWithObjects:
-          [[UINavigationController alloc] initWithRootViewController:rootVC],
-          [[UINavigationController alloc] initWithRootViewController:detailVC],
-          nil];
+  // Configure Split view with an UINavigationController and a detail view
+  self.splitViewController = [[[UISplitViewController alloc] init] autorelease];
+  UINavigationController *root = [[UINavigationController alloc] initWithRootViewController:rootVC];
+  UINavigationController *detail = [[UINavigationController alloc] initWithRootViewController:detailVC];
+
+  [detail setNavigationBarHidden:YES animated:NO];
+
+  NSArray *viewControllers = [NSArray arrayWithObjects: root, detail, nil];
+
 
   self.splitViewController.viewControllers = viewControllers;
   self.splitViewController.delegate = detailVC;
+
+  [root release];
+  [detail release];
 }
 
 -(void)pushSplitViewControllers:(NSString *)name withData:(NSDictionary *)data
 {
+  NSLog(@"%s", __func__);
+
   // fetch VCs from registry
   ViewRegistry *registry = [ViewRegistry sharedViewRegistry];
   RootViewController *rootVC = [registry rootControllerForName:name];
@@ -111,16 +139,10 @@
   self.splitViewController.delegate = detailVC;
 
   // configure with data
-  [rootVC configure:data];
+  rootVC.data = data;
 
-  // configur SplitController's UINavigationController
-  [[self.splitViewController.viewControllers objectAtIndex:0]
-                                        pushViewController:rootVC
-                                                  animated:YES];
-
-  //[[self.splitViewController.viewControllers objectAtIndex:1]
-                                        //pushViewController:detailVC
-                                                  //animated:YES];
+  // configure SplitController's UINavigationController
+  [[self.splitViewController.viewControllers objectAtIndex:0] pushViewController:rootVC animated:YES];
 
 }
 
@@ -135,7 +157,6 @@
   [window release];
   [super dealloc];
 }
-
 
 @end
 // vim: set ts=2 sw=2 expandtab:

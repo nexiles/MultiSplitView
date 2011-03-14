@@ -14,14 +14,16 @@
   NSString * _name;
   NSString * _oid;
   NSString * _owner;
+    NSDictionary *_data;
 }
 
 @property (nonatomic, retain) NSString    * name;
 @property (nonatomic, retain) NSString    * oid;
 @property (nonatomic, retain) NSString    * owner;
 @property (nonatomic, retain) NSArray     * EPMDocuments;
+@property (nonatomic, retain) NSDictionary     * data;
 
--(void)configure:(NSDictionary *)info;
+-(void)configure;
 
 @end
 // vim: set ts=2 sw=2 expandtab:

@@ -14,6 +14,8 @@
   NSString * _name;
   NSArray  * _products;
 
+  NSDictionary *_data;
+
   ProductDetailViewController * _detailView;
   UITableView                 * _tableView;
 }
@@ -23,8 +25,9 @@
 
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSArray  * products;
+@property (nonatomic, retain) NSDictionary  * data;
 
--(void)configure:(NSDictionary *)info;
+-(void)configure;
 
 @end
 // vim: set ts=2 sw=2 expandtab:
