@@ -29,15 +29,15 @@ enum {
 @synthesize owner        = _owner;
 @synthesize oid          = _oid;
 @synthesize EPMDocuments = _EPMDocuments;
+@synthesize data         = _data;
 
--(void)configure:(NSDictionary *)info
+
+-(void)configure
 {
-  NSLog(@"%s: self=%@", __func__, self);
-
-  self.name         = [info objectForKey:@"name"];
-  self.oid          = [info objectForKey:@"oid"];
-  self.owner        = [info objectForKey:@"owner"];
-  self.EPMDocuments = [info objectForKey:@"epm_documents"];
+  self.name         = [self.data objectForKey:@"name"];
+  self.oid          = [self.data objectForKey:@"oid"];
+  self.owner        = [self.data objectForKey:@"owner"];
+  self.EPMDocuments = [self.data objectForKey:@"epm_documents"];
 
   if (self.popoverController != nil) {
     [self.popoverController dismissPopoverAnimated:YES];
@@ -48,7 +48,7 @@ enum {
 
 - (void)configureView
 {
-   NSLog(@"%s", __func__);
+   //NSLog(@"%s", __func__);
    self.title = self.name;
 
    [[self tableView] reloadData];
@@ -64,7 +64,14 @@ enum {
   // load default org
   NXDataLoader *loader = [NXDataLoader sharedLoader];
   NSDictionary *defaultOrg = [loader loadBundledJSON:@"product-default"];
-  [self configure:defaultOrg];
+  self.data = defaultOrg;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+  NSLog(@"%s", __func__);
+  [super viewWillAppear:animated];
+  [self configure];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -135,7 +142,7 @@ enum {
 
 -(UITableViewCell *)detailCellForRow:(NSInteger)row tableView:(UITableView *)tableView
 {
-  NSLog(@"%s", __func__);
+  //NSLog(@"%s", __func__);
   static NSString *CellIdentifier = @"ProdDetailCell";
 
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -170,7 +177,7 @@ enum {
 
 -(UITableViewCell *)docCellForDoc:(NSDictionary *)doc tableView:(UITableView *)tableView
 {
-  NSLog(@"%s", __func__);
+  //NSLog(@"%s", __func__);
   static NSString *CellIdentifier = @"DocCell";
 
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];

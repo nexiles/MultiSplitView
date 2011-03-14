@@ -16,16 +16,25 @@
 
 @synthesize products   = _products;
 @synthesize name       = _name;
+@synthesize data       = _data;
 @synthesize tableView  = _tableView;
 @synthesize detailView = _detailView;
 
 
--(void)configure:(NSDictionary *)info
+-(void)configure
 {
-  NSLog(@"%s: info=%@", __func__, info);
-
-  self.products = [info objectForKey:@"products"];
+  self.products = [self.data objectForKey:@"products"];
   [self configureView];
+
+  // select row
+  NSIndexPath *selection = [self.data objectForKey:@"selection"];
+  NSIndexPath *path = [NSIndexPath indexPathForRow:selection.row inSection:0];
+  NSLog(@"%s: selection=%@", __func__, selection);
+  NSLog(@"%s: path=%@", __func__, path);
+  [self.tableView selectRowAtIndexPath:path
+                              animated:YES
+                        scrollPosition:UITableViewScrollPositionMiddle];
+  [self tableView:self.tableView didSelectRowAtIndexPath:path];
 }
 
 
@@ -35,6 +44,28 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.name = @"Products";
+  self.clearsSelectionOnViewWillAppear = NO;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+  NSLog(@"%s", __func__);
+  [super viewDidAppear:animated];
+  [self configure];
+ 
+  // Send notfication to get detail view on screen
+  NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys: @"product", @"controller_name", nil];
+  NSNotification *note = [NSNotification notificationWithName:@"new_detail_controller"
+                                                       object:self
+                                                     userInfo:info];
+  [[NSNotificationCenter defaultCenter] postNotification: note];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+  NSLog(@"%s", __func__);
+  [super viewWillDisappear:animated];
+  [self.detailView.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)configureView
@@ -87,9 +118,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  NSLog(@"%s: indexPath=%@", __func__, indexPath);
+
   NSInteger row = [indexPath row];
   NSDictionary *product = [[self products] objectAtIndex: row];
-  [self.detailView configure:product];
+  self.detailView.data = product;
+  [self.detailView configure];
 }
 
 

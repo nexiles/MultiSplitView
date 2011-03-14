@@ -19,13 +19,15 @@
 
 @interface DetailViewController : UIViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate> {
 }
--(void)configure:(NSDictionary *)info;
+-(void)configure;
+@property (nonatomic,retain) NSDictionary *data;
 @end
 
 @interface RootViewController : UIViewController {
 }
 @property (nonatomic, retain) DetailViewController *detailView;
--(void)configure:(NSDictionary *)info;
+@property (nonatomic,retain) NSDictionary *data;
+-(void)configure;
 @end
 
 @interface ViewRegistry : NSObject {
