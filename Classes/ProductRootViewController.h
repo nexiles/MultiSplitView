@@ -8,24 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ProductDetailViewController.h"
+#import "BaseRootViewController.h"
 
-@interface ProductRootViewController : UITableViewController {
+@interface ProductRootViewController : BaseRootViewController {
   NSString * _name;
   NSArray  * _products;
-
-  NSDictionary *_data;
-
-  ProductDetailViewController * _detailView;
-  UITableView                 * _tableView;
 }
-
-@property (nonatomic, retain) IBOutlet ProductDetailViewController * detailView;
-@property (nonatomic, retain) IBOutlet UITableView                 * tableView;
 
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSArray  * products;
-@property (nonatomic, retain) NSDictionary  * data;
 
 -(void)configure;
 

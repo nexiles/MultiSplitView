@@ -17,20 +17,12 @@ enum {
 };
 
 
-@interface ProductDetailViewController ()
-@property (nonatomic, retain) UIPopoverController *popoverController;
--(void)configureView;
-@end
-
 @implementation ProductDetailViewController
 
-@synthesize popoverController;
 @synthesize name         = _name;
 @synthesize owner        = _owner;
 @synthesize oid          = _oid;
 @synthesize EPMDocuments = _EPMDocuments;
-@synthesize data         = _data;
-
 
 -(void)configure
 {
@@ -43,17 +35,9 @@ enum {
     [self.popoverController dismissPopoverAnimated:YES];
   }
 
-  [self configureView];
+  self.title = self.name;
+  [[self tableView] reloadData];
 }
-
-- (void)configureView
-{
-   //NSLog(@"%s", __func__);
-   self.title = self.name;
-
-   [[self tableView] reloadData];
-}
-
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -74,10 +58,6 @@ enum {
   [self configure];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Override to allow orientations other than the default portrait orientation.
-    return YES;
-}
 
 #pragma mark -
 #pragma mark Split View Controller Delegate

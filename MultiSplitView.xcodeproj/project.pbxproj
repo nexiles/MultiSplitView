@@ -32,6 +32,7 @@
 		BF7035B5132A1F8100DA6F71 /* ProductDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF7035B3132A1F8100DA6F71 /* ProductDetailViewController.xib */; };
 		BF7035E9132A28D200DA6F71 /* product-default.json in Resources */ = {isa = PBXBuildFile; fileRef = BF7035E8132A28D200DA6F71 /* product-default.json */; };
 		BFA32766132E7E3400A1E6C1 /* BaseRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA32765132E7E3400A1E6C1 /* BaseRootViewController.m */; };
+		BFA32814132E8E2D00A1E6C1 /* BaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA32813132E8E2D00A1E6C1 /* BaseDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,8 @@
 		BF7035E8132A28D200DA6F71 /* product-default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "product-default.json"; sourceTree = "<group>"; };
 		BFA32764132E7E3400A1E6C1 /* BaseRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRootViewController.h; sourceTree = "<group>"; };
 		BFA32765132E7E3400A1E6C1 /* BaseRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRootViewController.m; sourceTree = "<group>"; };
+		BFA32812132E8E2D00A1E6C1 /* BaseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseDetailViewController.h; sourceTree = "<group>"; };
+		BFA32813132E8E2D00A1E6C1 /* BaseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +176,8 @@
 				BF7035B2132A1F8100DA6F71 /* ProductDetailViewController.m */,
 				BFA32764132E7E3400A1E6C1 /* BaseRootViewController.h */,
 				BFA32765132E7E3400A1E6C1 /* BaseRootViewController.m */,
+				BFA32812132E8E2D00A1E6C1 /* BaseDetailViewController.h */,
+				BFA32813132E8E2D00A1E6C1 /* BaseDetailViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -288,6 +293,7 @@
 				BF7035AF132A1F6B00DA6F71 /* ProductRootViewController.m in Sources */,
 				BF7035B4132A1F8100DA6F71 /* ProductDetailViewController.m in Sources */,
 				BFA32766132E7E3400A1E6C1 /* BaseRootViewController.m in Sources */,
+				BFA32814132E8E2D00A1E6C1 /* BaseDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

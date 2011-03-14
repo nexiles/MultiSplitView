@@ -8,23 +8,19 @@
 
 #import "ProductRootViewController.h"
 
-@interface ProductRootViewController ()
--(void)configureView;
-@end
+#import "ViewRegistry.h"
+#import "NXDataLoader.h"
 
 @implementation ProductRootViewController
 
 @synthesize products   = _products;
 @synthesize name       = _name;
-@synthesize data       = _data;
-@synthesize tableView  = _tableView;
-@synthesize detailView = _detailView;
-
 
 -(void)configure
 {
   self.products = [self.data objectForKey:@"products"];
-  [self configureView];
+  self.title = self.name;
+  [[self tableView] reloadData];
 
   // select row
   NSIndexPath *selection = [self.data objectForKey:@"selection"];
@@ -37,28 +33,38 @@
   [self tableView:self.tableView didSelectRowAtIndexPath:path];
 }
 
+#pragma mark -
+#pragma mark initialization
+
+-(id)initWithNibName:(NSString *)name bundle:(NSBundle *)bundle
+{
+  NSLog(@"%s", __func__);
+  self = [super initWithNibName:name bundle:bundle];
+  if (self) {
+
+    self.name = @"Products";
+    self.controllerName = @"product";
+    self.clearsSelectionOnViewWillAppear = NO;
+
+    assert(self.tableView);
+
+    // default data
+    NXDataLoader *loader = [NXDataLoader sharedLoader];
+    self.data = [loader loadBundledJSON:@"product-default"];
+
+    return self;
+  }
+  return nil;
+}
 
 #pragma mark -
 #pragma mark View lifecycle
-
-- (void)viewDidLoad {
-  [super viewDidLoad];
-  self.name = @"Products";
-  self.clearsSelectionOnViewWillAppear = NO;
-}
 
 - (void)viewDidAppear:(BOOL)animated
 {
   NSLog(@"%s", __func__);
   [super viewDidAppear:animated];
   [self configure];
- 
-  // Send notfication to get detail view on screen
-  NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys: @"product", @"controller_name", nil];
-  NSNotification *note = [NSNotification notificationWithName:@"new_detail_controller"
-                                                       object:self
-                                                     userInfo:info];
-  [[NSNotificationCenter defaultCenter] postNotification: note];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -67,18 +73,6 @@
   [super viewWillDisappear:animated];
   [self.detailView.navigationController popViewControllerAnimated:YES];
 }
-
--(void)configureView
-{
-  self.title = self.name;
-  [[self tableView] reloadData];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Override to allow orientations other than the default portrait orientation.
-    return YES;
-}
-
 
 #pragma mark -
 #pragma mark Table view data source
@@ -137,6 +131,7 @@
 
 - (void)viewDidUnload
 {
+  [super viewDidUnload];
   self.name = nil;
   self.products = nil;
 }

@@ -7,21 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseDetailViewController.h"
 
-
-@interface ProductDetailViewController : UITableViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate> {
-  NSArray * _EPMDocuments;
-  NSString * _name;
-  NSString * _oid;
-  NSString * _owner;
-    NSDictionary *_data;
+@interface ProductDetailViewController : BaseDetailViewController {
+  NSArray      * _EPMDocuments;
+  NSString     * _name;
+  NSString     * _oid;
+  NSString     * _owner;
 }
 
-@property (nonatomic, retain) NSString    * name;
-@property (nonatomic, retain) NSString    * oid;
-@property (nonatomic, retain) NSString    * owner;
-@property (nonatomic, retain) NSArray     * EPMDocuments;
-@property (nonatomic, retain) NSDictionary     * data;
+@property (nonatomic, retain) NSString     * name;
+@property (nonatomic, retain) NSString     * oid;
+@property (nonatomic, retain) NSString     * owner;
+@property (nonatomic, retain) NSArray      * EPMDocuments;
 
 -(void)configure;
 
