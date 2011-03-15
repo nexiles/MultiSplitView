@@ -20,7 +20,6 @@
 
 @interface MultiSplitViewAppDelegate ()
 -(void)configureRootViews;
--(void)pushSplitViewControllers:(NSString *)name withData:(NSDictionary *)data;
 -(void)newRootController:(NSNotification *)note;
 -(void)newDetailController:(NSNotification *)note;
 @end
@@ -83,7 +82,26 @@
   NSString *controller_name = [info objectForKey:@"controller_name"];
   NSDictionary *data        = [info objectForKey:@"data"];
 
-  [self pushSplitViewControllers:controller_name withData:data];
+  // fetch VCs from registry
+  ViewRegistry *registry         = [ViewRegistry sharedViewRegistry];
+  BaseRootViewController *rootVC     = [registry rootControllerForName:controller_name];
+  BaseDetailViewController *detailVC = [registry detailControllerForName:controller_name];
+  BaseRootViewController *topVC      = (BaseRootViewController *)[[self.splitViewController.viewControllers objectAtIndex:0] topViewController];
+
+  NSLog(@"%s: rootVC=%@", __func__, rootVC);
+  NSLog(@"%s: topVC=%@", __func__, topVC);
+  // we don't want to push the same instance twice.
+  if (rootVC != topVC) {
+    // hook them
+    rootVC.detailView = detailVC;
+    self.splitViewController.delegate = detailVC;
+
+    // configure with data
+    rootVC.data = data;
+
+    // configure SplitController's UINavigationController
+    [[self.splitViewController.viewControllers objectAtIndex:0] pushViewController:rootVC animated:YES];
+  }
 }
 
 -(void)newDetailController:(NSNotification *)note
@@ -95,22 +113,31 @@
   NSString *controller_name = [info objectForKey:@"controller_name"];
 
   ViewRegistry *registry         = [ViewRegistry sharedViewRegistry];
-  DetailViewController *detailVC = [registry detailControllerForName:controller_name];
+  BaseDetailViewController *detailVC = [registry detailControllerForName:controller_name];
+  BaseDetailViewController *topVC = (BaseDetailViewController *)[[self.splitViewController.viewControllers objectAtIndex:1] topViewController];
 
-  self.splitViewController.delegate = detailVC;
+  NSLog(@"%s: detailVC=%@", __func__, detailVC);
+  NSLog(@"%s: topVC=%@", __func__, topVC);
 
-  if (detailVC != [[self.splitViewController.viewControllers objectAtIndex:1] topViewController]) {
+  // we don't want to push the same instance twice.
+  if (detailVC != topVC) {
+    self.splitViewController.delegate = detailVC;
+
+
     [[self.splitViewController.viewControllers objectAtIndex:1] pushViewController:detailVC animated:YES];
   }
 }
+
+#pragma mark -
+#pragma mark Configure SplitController
 
 -(void)configureRootViews
 {
   NSLog(@"%s", __func__);
   ViewRegistry *registry = [ViewRegistry sharedViewRegistry];
 
-  RootViewController *rootVC = [registry rootControllerForName:@"organization"];
-  DetailViewController *detailVC = [registry detailControllerForName:@"organization"];
+  BaseRootViewController *rootVC = [registry rootControllerForName:@"organization"];
+  BaseDetailViewController *detailVC = [registry detailControllerForName:@"organization"];
 
   // hook view controllers
   rootVC.detailView = detailVC;
@@ -130,27 +157,6 @@
 
   [root release];
   [detail release];
-}
-
--(void)pushSplitViewControllers:(NSString *)name withData:(NSDictionary *)data
-{
-  NSLog(@"%s", __func__);
-
-  // fetch VCs from registry
-  ViewRegistry *registry = [ViewRegistry sharedViewRegistry];
-  RootViewController *rootVC = [registry rootControllerForName:name];
-  DetailViewController *detailVC = [registry detailControllerForName:name];
-
-  // hook them
-  rootVC.detailView = detailVC;
-  self.splitViewController.delegate = detailVC;
-
-  // configure with data
-  rootVC.data = data;
-
-  // configure SplitController's UINavigationController
-  [[self.splitViewController.viewControllers objectAtIndex:0] pushViewController:rootVC animated:YES];
-
 }
 
 
