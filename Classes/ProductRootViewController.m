@@ -116,7 +116,15 @@
 
   NSInteger row = [indexPath row];
   NSDictionary *product = [[self products] objectAtIndex: row];
-  self.detailView.data = product;
+
+  // Try to load Product Data
+  NXDataLoader *loader = [NXDataLoader sharedLoader];
+  NSDictionary *product_data = [loader loadBundledJSON:[product objectForKey:@"name"]];
+  if (!product_data) {
+    product_data = [loader loadBundledJSON:@"product-default"];
+  }
+
+  self.detailView.data = product_data;
   [self.detailView configure];
 }
 

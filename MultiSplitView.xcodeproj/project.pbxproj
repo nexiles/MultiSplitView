@@ -37,6 +37,9 @@
 		BFA32853132F503B00A1E6C1 /* DocumentRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFA32851132F503B00A1E6C1 /* DocumentRootViewController.xib */; };
 		BFA32857132F505400A1E6C1 /* DocumentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA32855132F505400A1E6C1 /* DocumentDetailViewController.m */; };
 		BFA32858132F505400A1E6C1 /* DocumentDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFA32856132F505400A1E6C1 /* DocumentDetailViewController.xib */; };
+		BFA3291C132F6DD300A1E6C1 /* Product C.json in Resources */ = {isa = PBXBuildFile; fileRef = BFA32919132F6DD300A1E6C1 /* Product C.json */; };
+		BFA3291D132F6DD300A1E6C1 /* documents-default.json in Resources */ = {isa = PBXBuildFile; fileRef = BFA3291A132F6DD300A1E6C1 /* documents-default.json */; };
+		BFA3291E132F6DD300A1E6C1 /* document-default.json in Resources */ = {isa = PBXBuildFile; fileRef = BFA3291B132F6DD300A1E6C1 /* document-default.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +93,9 @@
 		BFA32854132F505400A1E6C1 /* DocumentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentDetailViewController.h; sourceTree = "<group>"; };
 		BFA32855132F505400A1E6C1 /* DocumentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentDetailViewController.m; sourceTree = "<group>"; };
 		BFA32856132F505400A1E6C1 /* DocumentDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DocumentDetailViewController.xib; path = Classes/DocumentDetailViewController.xib; sourceTree = "<group>"; };
+		BFA32919132F6DD300A1E6C1 /* Product C.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Product C.json"; sourceTree = "<group>"; };
+		BFA3291A132F6DD300A1E6C1 /* documents-default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "documents-default.json"; sourceTree = "<group>"; };
+		BFA3291B132F6DD300A1E6C1 /* document-default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "document-default.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,17 +156,15 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				BF7035E8132A28D200DA6F71 /* product-default.json */,
+				BFA3291F132F6DDA00A1E6C1 /* JSON Data */,
 				BFA32851132F503B00A1E6C1 /* DocumentRootViewController.xib */,
 				BF7035AE132A1F6B00DA6F71 /* ProductRootViewController.xib */,
 				BF7035B3132A1F8100DA6F71 /* ProductDetailViewController.xib */,
 				BFA32856132F505400A1E6C1 /* DocumentDetailViewController.xib */,
-				BF5C52B31328CF6C000BB093 /* organization-default.json */,
 				BF5C5173132807DB000BB093 /* OrgDetailViewController.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				BF5C51C313281669000BB093 /* OrgRootViewController.xib */,
 				8D1107310486CEB800E47090 /* MultiSplitView-Info.plist */,
-				BF5C5222132821B3000BB093 /* organizations.json */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -227,6 +231,19 @@
 			name = Support;
 			sourceTree = "<group>";
 		};
+		BFA3291F132F6DDA00A1E6C1 /* JSON Data */ = {
+			isa = PBXGroup;
+			children = (
+				BF5C52B31328CF6C000BB093 /* organization-default.json */,
+				BF5C5222132821B3000BB093 /* organizations.json */,
+				BFA32919132F6DD300A1E6C1 /* Product C.json */,
+				BFA3291A132F6DD300A1E6C1 /* documents-default.json */,
+				BFA3291B132F6DD300A1E6C1 /* document-default.json */,
+				BF7035E8132A28D200DA6F71 /* product-default.json */,
+			);
+			name = "JSON Data";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -287,6 +304,9 @@
 				BF7035E9132A28D200DA6F71 /* product-default.json in Resources */,
 				BFA32853132F503B00A1E6C1 /* DocumentRootViewController.xib in Resources */,
 				BFA32858132F505400A1E6C1 /* DocumentDetailViewController.xib in Resources */,
+				BFA3291C132F6DD300A1E6C1 /* Product C.json in Resources */,
+				BFA3291D132F6DD300A1E6C1 /* documents-default.json in Resources */,
+				BFA3291E132F6DD300A1E6C1 /* document-default.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
