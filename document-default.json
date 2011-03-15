@@ -1,0 +1,25 @@
+{
+    "cadname": "washer.prt", 
+    "name": "Washer", 
+    "number": "12345", 
+    "version": "A.1",
+    "oid": "OR:wt.epm.EPMDocument:08154711"
+    "attributes": [
+    	{ "name": "POS", "value": "10" },
+    	{ "name": "DESCRIPTION", "value": "Washer" },
+    	{ "name": "DIM A", "value": "17.0" }
+    ],
+
+    "thumbnail": "data",
+
+    "uses": [
+    	{ "oid": "OR:wt.epm.EPMDocument:1234", "name": "ring" },
+    	{ "oid": "OR:wt.epm.EPMDocument:1235", "name": "pulley" },
+    	{ "oid": "OR:wt.epm.EPMDocument:1236", "name": "rod" }
+    ],
+
+    "used-by": [
+    	{ "oid": "OR:wt.epm.EPMDocument:9999", "name": "drive-assy" },
+    	{ "oid": "OR:wt.epm.EPMDocument:7777", "name": "main-assy" }
+    ]
+}
