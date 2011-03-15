@@ -242,7 +242,7 @@ enum {
               indexPath, @"selection",
               nil];
     NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
-              self.controllerName, @"controller_name",
+              @"product", @"controller_name",
               products, @"data",
               nil];
     NSNotification *note = [NSNotification notificationWithName:@"new_root_controller"
