@@ -26,6 +26,8 @@ enum {
 
 -(void)configure
 {
+  NSLog(@"%s: data=%@", __func__, self.data);
+
   self.name         = [self.data objectForKey:@"name"];
   self.oid          = [self.data objectForKey:@"oid"];
   self.owner        = [self.data objectForKey:@"owner"];
