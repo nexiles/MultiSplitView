@@ -18,4 +18,7 @@
 
 -(id)loadBundledJSON:(NSString *)name;
 
+// load data using the OID key
+-(id)loadOID:(NSString *)oid;
+
 @end

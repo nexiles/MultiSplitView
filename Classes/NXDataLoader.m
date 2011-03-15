@@ -9,12 +9,12 @@
 #import "NXDataLoader.h"
 #import "NSString+SBJSON.h"
 
+static NXDataLoader *_sharedNXDataLoader = nil;
+
 @implementation NXDataLoader
 
 #pragma mark -
 #pragma mark Data Loading
-
-static NXDataLoader *_sharedNXDataLoader = nil;
 
 -(id)loadBundledJSON:(NSString *)name
 {
@@ -29,6 +29,12 @@ static NXDataLoader *_sharedNXDataLoader = nil;
   NSLog(@"%s: json=%@", __func__, json);
   
   return json;
+}
+
+- (id)loadOID:(NSString *)oid
+{
+  // fall back to bundled data for now.
+  return [self loadBundledJSON:oid]; 
 }
 
 #pragma mark -
