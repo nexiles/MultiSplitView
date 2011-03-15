@@ -46,17 +46,39 @@ enum {
 }
 
 #pragma mark -
-#pragma mark View lifecycle
+#pragma mark initialization
 
-- (void)viewDidLoad {
-  [super viewDidLoad];
+-(id)initWithNibName:(NSString *)name bundle:(NSBundle *)bundle
+{
+  NSLog(@"%s", __func__);
+  self = [super initWithNibName:name bundle:bundle];
+  if (self) {
 
-  // load default org
-  NXDataLoader *loader = [NXDataLoader sharedLoader];
-  NSDictionary *p = [loader loadBundledJSON:@"document-default"];
-  self.data = p;
+    self.name = @"EPM Document";
+    self.controllerName = @"document";
+    self.clearsSelectionOnViewWillAppear = NO;
+
+    assert(self.tableView);
+
+    // load default org
+    NXDataLoader *loader     = [NXDataLoader sharedLoader];
+    NSDictionary *d = [loader loadBundledJSON:@"document-default"];
+    self.data = d;
+
+    return self;
+  }
+  return nil;
 }
 
+#pragma mark -
+#pragma mark View lifecycle
+
+- (void)viewWillAppear:(BOOL)animated
+{
+  NSLog(@"%s", __func__);
+  [super viewWillAppear:animated];
+  [self configure];
+}
 
 #pragma mark -
 #pragma mark Table view data source

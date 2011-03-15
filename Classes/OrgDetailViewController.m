@@ -38,17 +38,32 @@ enum {
 }
 
 #pragma mark -
-#pragma mark View lifecycle
+#pragma mark initialization
 
-- (void)viewDidLoad {
-  NSLog(@"%s: self=%@", __func__, self);
-  [super viewDidLoad];
+-(id)initWithNibName:(NSString *)name bundle:(NSBundle *)bundle
+{
+  NSLog(@"%s", __func__);
+  self = [super initWithNibName:name bundle:bundle];
+  if (self) {
 
-  // load default org
-  NXDataLoader *loader     = [NXDataLoader sharedLoader];
-  NSDictionary *defaultOrg = [loader loadBundledJSON:@"organization-default"];
-  self.data = defaultOrg;
+    self.name = @"Organization";
+    self.controllerName = @"organization";
+    self.clearsSelectionOnViewWillAppear = NO;
+
+    assert(self.tableView);
+
+    // load default org
+    NXDataLoader *loader     = [NXDataLoader sharedLoader];
+    NSDictionary *defaultOrg = [loader loadBundledJSON:@"organization-default"];
+    self.data = defaultOrg;
+
+    return self;
+  }
+  return nil;
 }
+
+#pragma mark -
+#pragma mark View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated
 {
