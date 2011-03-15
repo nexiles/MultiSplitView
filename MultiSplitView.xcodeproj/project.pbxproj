@@ -33,6 +33,10 @@
 		BF7035E9132A28D200DA6F71 /* product-default.json in Resources */ = {isa = PBXBuildFile; fileRef = BF7035E8132A28D200DA6F71 /* product-default.json */; };
 		BFA32766132E7E3400A1E6C1 /* BaseRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA32765132E7E3400A1E6C1 /* BaseRootViewController.m */; };
 		BFA32814132E8E2D00A1E6C1 /* BaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA32813132E8E2D00A1E6C1 /* BaseDetailViewController.m */; };
+		BFA32852132F503B00A1E6C1 /* DocumentRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA32850132F503B00A1E6C1 /* DocumentRootViewController.m */; };
+		BFA32853132F503B00A1E6C1 /* DocumentRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFA32851132F503B00A1E6C1 /* DocumentRootViewController.xib */; };
+		BFA32857132F505400A1E6C1 /* DocumentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA32855132F505400A1E6C1 /* DocumentDetailViewController.m */; };
+		BFA32858132F505400A1E6C1 /* DocumentDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFA32856132F505400A1E6C1 /* DocumentDetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +84,12 @@
 		BFA32765132E7E3400A1E6C1 /* BaseRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRootViewController.m; sourceTree = "<group>"; };
 		BFA32812132E8E2D00A1E6C1 /* BaseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseDetailViewController.h; sourceTree = "<group>"; };
 		BFA32813132E8E2D00A1E6C1 /* BaseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseDetailViewController.m; sourceTree = "<group>"; };
+		BFA3284F132F503B00A1E6C1 /* DocumentRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentRootViewController.h; sourceTree = "<group>"; };
+		BFA32850132F503B00A1E6C1 /* DocumentRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentRootViewController.m; sourceTree = "<group>"; };
+		BFA32851132F503B00A1E6C1 /* DocumentRootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DocumentRootViewController.xib; path = Classes/DocumentRootViewController.xib; sourceTree = "<group>"; };
+		BFA32854132F505400A1E6C1 /* DocumentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentDetailViewController.h; sourceTree = "<group>"; };
+		BFA32855132F505400A1E6C1 /* DocumentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentDetailViewController.m; sourceTree = "<group>"; };
+		BFA32856132F505400A1E6C1 /* DocumentDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DocumentDetailViewController.xib; path = Classes/DocumentDetailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,8 +151,10 @@
 			isa = PBXGroup;
 			children = (
 				BF7035E8132A28D200DA6F71 /* product-default.json */,
+				BFA32851132F503B00A1E6C1 /* DocumentRootViewController.xib */,
 				BF7035AE132A1F6B00DA6F71 /* ProductRootViewController.xib */,
 				BF7035B3132A1F8100DA6F71 /* ProductDetailViewController.xib */,
+				BFA32856132F505400A1E6C1 /* DocumentDetailViewController.xib */,
 				BF5C52B31328CF6C000BB093 /* organization-default.json */,
 				BF5C5173132807DB000BB093 /* OrgDetailViewController.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
@@ -178,6 +190,10 @@
 				BFA32765132E7E3400A1E6C1 /* BaseRootViewController.m */,
 				BFA32812132E8E2D00A1E6C1 /* BaseDetailViewController.h */,
 				BFA32813132E8E2D00A1E6C1 /* BaseDetailViewController.m */,
+				BFA3284F132F503B00A1E6C1 /* DocumentRootViewController.h */,
+				BFA32850132F503B00A1E6C1 /* DocumentRootViewController.m */,
+				BFA32854132F505400A1E6C1 /* DocumentDetailViewController.h */,
+				BFA32855132F505400A1E6C1 /* DocumentDetailViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -269,6 +285,8 @@
 				BF7035B0132A1F6B00DA6F71 /* ProductRootViewController.xib in Resources */,
 				BF7035B5132A1F8100DA6F71 /* ProductDetailViewController.xib in Resources */,
 				BF7035E9132A28D200DA6F71 /* product-default.json in Resources */,
+				BFA32853132F503B00A1E6C1 /* DocumentRootViewController.xib in Resources */,
+				BFA32858132F505400A1E6C1 /* DocumentDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +312,8 @@
 				BF7035B4132A1F8100DA6F71 /* ProductDetailViewController.m in Sources */,
 				BFA32766132E7E3400A1E6C1 /* BaseRootViewController.m in Sources */,
 				BFA32814132E8E2D00A1E6C1 /* BaseDetailViewController.m in Sources */,
+				BFA32852132F503B00A1E6C1 /* DocumentRootViewController.m in Sources */,
+				BFA32857132F505400A1E6C1 /* DocumentDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
