@@ -57,6 +57,7 @@ enum {
     NSDictionary *defaultOrg = [loader loadBundledJSON:@"organization-default"];
     self.data = defaultOrg;
 
+
     return self;
   }
   return nil;

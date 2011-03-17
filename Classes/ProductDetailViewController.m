@@ -26,8 +26,6 @@ enum {
 
 -(void)configure
 {
-  NSLog(@"%s: data=%@", __func__, self.data);
-
   self.name         = [self.data objectForKey:@"name"];
   self.oid          = [self.data objectForKey:@"oid"];
   self.owner        = [self.data objectForKey:@"owner"];
@@ -56,14 +54,27 @@ enum {
 
     assert(self.tableView);
 
-    // load default org
+    // load default product
     NXDataLoader *loader     = [NXDataLoader sharedLoader];
     NSDictionary *d = [loader loadBundledJSON:@"product-default"];
     self.data = d;
 
+    [[NSNotificationCenter defaultCenter]
+      addObserver:self
+         selector:@selector(dataLoadNotification:)
+             name:@"load-product"
+           object:nil];
+
     return self;
   }
   return nil;
+}
+
+-(void)dataLoadNotification:(NSNotification *)note
+{
+  NSLog(@"%s", __func__);
+  self.data = note.userInfo;
+  [self configure];
 }
 
 #pragma mark -
@@ -226,14 +237,21 @@ enum {
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-    // ...
-    // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release];
-    */
+  NSInteger section = [indexPath section];
+  if (section == kDocumentsSection) {
+    NSDictionary *docs = [NSDictionary dictionaryWithObjectsAndKeys:
+              [self EPMDocuments], @"epm_documents",
+              indexPath, @"selection",
+              nil];
+    NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
+              @"document", @"controller_name",
+              docs, @"data",
+              nil];
+    NSNotification *note = [NSNotification notificationWithName:@"new_root_controller"
+                                                         object:self
+                                                       userInfo:info];
+    [[NSNotificationCenter defaultCenter] postNotification: note];
+  }
 }
 
 
@@ -243,18 +261,23 @@ enum {
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-
-    // Relinquish ownership any cached data, images, etc. that aren't in use.
 }
 
 - (void)viewDidUnload {
-    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
+  self.name = nil;
+  self.owner = nil;
+  self.oid = nil;
+  self.EPMDocuments = nil;
 }
 
 
 - (void)dealloc {
-    [super dealloc];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  self.name = nil;
+  self.owner = nil;
+  self.oid = nil;
+  self.EPMDocuments = nil;
+  [super dealloc];
 }
 
 

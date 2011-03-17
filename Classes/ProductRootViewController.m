@@ -10,6 +10,7 @@
 
 #import "ViewRegistry.h"
 #import "NXDataLoader.h"
+#import "NXWindchillDataLoader.h"
 
 @implementation ProductRootViewController
 
@@ -48,13 +49,16 @@
 
     assert(self.tableView);
 
-    // default data
-    NXDataLoader *loader = [NXDataLoader sharedLoader];
-    self.data = [loader loadBundledJSON:@"product-default"];
-
     return self;
   }
   return nil;
+}
+
+-(void)dataLoadNotification:(NSNotification *)note
+{
+  NSLog(@"%s", __func__);
+  self.data = note.userInfo;
+  [self configure];
 }
 
 #pragma mark -
@@ -118,14 +122,8 @@
   NSDictionary *product = [[self products] objectAtIndex: row];
 
   // Try to load Product Data
-  NXDataLoader *loader = [NXDataLoader sharedLoader];
-  NSDictionary *product_data = [loader loadBundledJSON:[product objectForKey:@"name"]];
-  if (!product_data) {
-    product_data = [loader loadBundledJSON:@"product-default"];
-  }
-
-  self.detailView.data = product_data;
-  [self.detailView configure];
+  NXWindchillDataLoader *dataLoader = [NXWindchillDataLoader sharedLoader];
+  [dataLoader getProductForOID:[product objectForKey:@"oid"]];
 }
 
 

@@ -10,6 +10,7 @@
 
 #import "ViewRegistry.h"
 #import "NXDataLoader.h"
+#import "NXWindchillDataLoader.h"
 
 @implementation OrgRootViewController
 
@@ -21,8 +22,9 @@
   NSLog(@"%s", __func__);
   NSArray *orgs = [self.data objectForKey:@"organizations"];
   self.organizations = orgs;
-    self.title = self.name;
-    [[self tableView] reloadData];}
+  self.title = self.name;
+  [[self tableView] reloadData];
+}
 
 #pragma mark -
 #pragma mark initialization
@@ -43,9 +45,22 @@
     NXDataLoader *loader = [NXDataLoader sharedLoader];
     self.data = [loader loadBundledJSON:@"organizations"];
 
+    [[NSNotificationCenter defaultCenter]
+      addObserver:self
+         selector:@selector(dataLoadNotification:)
+             name:@"load-organizations"
+           object:nil];
+
     return self;
   }
   return nil;
+}
+
+-(void)dataLoadNotification:(NSNotification *)note
+{
+  NSLog(@"%s", __func__);
+  self.data = note.userInfo;
+  [self configure];
 }
 
 #pragma mark -
@@ -121,6 +136,7 @@
 }
 
 - (void)dealloc {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.name = nil;
   self.organizations = nil;
   [super dealloc];
