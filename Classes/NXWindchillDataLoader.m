@@ -20,12 +20,9 @@ static NXWindchillDataLoader *_sharedLoader = nil;
 
 -(NSURL *)URLForModule:(NSString *)m method:(NSString *)f parameters:(NSDictionary *)params
 {
-    NSLog(@"%s: self.baseURL=%@", __func__, self.baseURL);
-    NSLog(@"%s: m=%@", __func__, m);
-    NSLog(@"%s: f=%@", __func__, f);
-
-
-
+    //NSLog(@"%s: self.baseURL=%@", __func__, self.baseURL);
+    //NSLog(@"%s: m=%@", __func__, m);
+    //NSLog(@"%s: f=%@", __func__, f);
     NSString *query = @"";
     for (NSString *key in params) {
         query = [query stringByAppendingFormat:@"&%@=%@",
@@ -37,15 +34,15 @@ static NXWindchillDataLoader *_sharedLoader = nil;
     if (query) {
        path = [path stringByAppendingString:query];
     }
-    NSLog(@"%s: path=%@", __func__, path);
+    //NSLog(@"%s: path=%@", __func__, path);
 
     NSURL *url = [NSURL URLWithString:path];
 
-    NSLog(@"%s: url=%@", __func__, url);
+    //NSLog(@"%s: url=%@", __func__, url);
     return url;
 }
 
--(void)fireRequestForURL:(NSURL *)url success:(void (^)(NSDictionary *data))success failure:(void (^)(ASIHTTPRequest *))failure
+-(void)fireRequestForURL:(NSURL *)url notificationName:(NSString *)name success:(void (^)(NSDictionary *data))success failure:(void (^)(ASIHTTPRequest *))failure
 {
     __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
 
@@ -54,11 +51,22 @@ static NXWindchillDataLoader *_sharedLoader = nil;
 
     [request setDelegate:self];
     [request setCompletionBlock:^{
-        NSLog(@"%s: (CompletionBlock) request=%@", __func__, request);
+        //NSLog(@"%s: (CompletionBlock) request=%@", __func__, request);
         NSString *responseString = [request responseString];
-        NSLog(@"%s: responseString=%@", __func__, responseString);
+        //NSLog(@"%s: responseString=%@", __func__, responseString);
+        @try {
+            NSDictionary *data = [responseString JSONValue];
+            if (success) {
+                success(data);
+            }
 
-        success([responseString JSONValue]);
+            NSNotification *note = [NSNotification notificationWithName:name
+                                                                 object:self
+                                                               userInfo:data];
+            [[NSNotificationCenter defaultCenter] postNotification:note];
+
+        } @finally {
+        }
     }];
     [request setFailedBlock:^{
         NSLog(@"%s: (FailureBlock) request=%@", __func__, request);
@@ -71,31 +79,52 @@ static NXWindchillDataLoader *_sharedLoader = nil;
 
 -(void)getOrganizationsWithSuccess:(void (^)(NSDictionary *data))success failure:(void (^)(ASIHTTPRequest *))failure
 {
-    NSLog(@"%s", __func__);
     NSURL *url = [self URLForModule:@"list" method:@"get_organizations" parameters:nil];
-    NSLog(@"%s: url=%@", __func__, url);
-
-    [self fireRequestForURL:url success:success failure:failure];
+    [self fireRequestForURL:url notificationName:@"load-organizations" success:success failure:failure];
 }
 
--(void)getProductsForOrganization:(NSString *)oid success:(void (^)(NSDictionary *data))success failure:(void (^)(ASIHTTPRequest *))failure;
+-(void)getProductForOID:(NSString *)oid success:(void (^)(NSDictionary *data))success failure:(void (^)(ASIHTTPRequest *))failure;
 {
-    NSLog(@"%s", __func__);
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys: oid, @"oid", nil];
     NSURL *url = [self URLForModule:@"list" method:@"get_product" parameters:params];
-    NSLog(@"%s: url=%@", __func__, url);
-
-    [self fireRequestForURL:url success:success failure:failure];
+    [self fireRequestForURL:url notificationName:@"load-product" success:success failure:failure];
 }
 
 -(void)getDocumentInfoForOID:(NSString *)oid success:(void (^)(NSDictionary *data))success failure:(void (^)(ASIHTTPRequest *))failure;
 {
-    NSLog(@"%s", __func__);
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys: oid, @"oid", nil];
     NSURL *url = [self URLForModule:@"list" method:@"get_epm_document" parameters:params];
-    NSLog(@"%s: url=%@", __func__, url);
+    [self fireRequestForURL:url notificationName:@"load-document" success:success failure:failure];
+}
 
-    [self fireRequestForURL:url success:success failure:failure];
+-(void)getOrganizationsWithSuccess:(void (^)(NSDictionary *data))success
+{
+    [self getOrganizationsWithSuccess:success failure:nil];
+}
+
+-(void)getProductForOID:(NSString *)oid success:(void (^)(NSDictionary *data))success
+{
+    [self getProductForOID: oid success:success failure:nil];
+}
+
+-(void)getDocumentInfoForOID:(NSString *)oid success:(void (^)(NSDictionary *data))success
+{
+    [self getDocumentInfoForOID: oid success:success failure:nil];
+}
+
+-(void)getOrganizations
+{
+    [self getOrganizationsWithSuccess:nil failure:nil];
+}
+
+-(void)getProductForOID:(NSString *)oid
+{
+    [self getProductForOID: oid success:nil failure:nil];
+}
+
+-(void)getDocumentInfoForOID:(NSString *)oid
+{
+    [self getDocumentInfoForOID: oid success:nil failure:nil];
 }
 
 #pragma mark -
@@ -127,7 +156,7 @@ static NXWindchillDataLoader *_sharedLoader = nil;
   NSLog(@"%s", __func__);
   self = [super init];
   if (self != nil) {
-    self.baseURL = @"http://wc.nexiles.com/Windchill";
+    self.baseURL = @"http://wc.nexiles.com/Windchill/netmarkets/jsp/nexiles";
     self.username = @"wcadmin";
     self.password = @"wcadmin";
   }

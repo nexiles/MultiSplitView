@@ -25,9 +25,20 @@
 
 +(NXWindchillDataLoader *)sharedLoader;
 
--(void)fireRequestForURL:(NSURL *)url success:(void (^)(NSDictionary *data))success failure:(void (^)(ASIHTTPRequest *))failure;
+-(void)fireRequestForURL:(NSURL *)url notificationName:(NSString *)name success:(void (^)(NSDictionary *data))success failure:(void (^)(ASIHTTPRequest *))failure;
 -(void)getOrganizationsWithSuccess:(void (^)(NSDictionary *data))success failure:(void (^)(ASIHTTPRequest *))failure;
--(void)getProductsForOrganization:(NSString *)oid success:(void (^)(NSDictionary *data))success failure:(void (^)(ASIHTTPRequest *))failure;
+-(void)getProductForOID:(NSString *)oid success:(void (^)(NSDictionary *data))success failure:(void (^)(ASIHTTPRequest *))failure;
 -(void)getDocumentInfoForOID:(NSString *)oid success:(void (^)(NSDictionary *data))success failure:(void (^)(ASIHTTPRequest *))failure;
+
+// just the success block
+-(void)getOrganizationsWithSuccess:(void (^)(NSDictionary *data))success;
+-(void)getProductForOID:(NSString *)oid success:(void (^)(NSDictionary *data))success;
+-(void)getDocumentInfoForOID:(NSString *)oid success:(void (^)(NSDictionary *data))success;
+
+// no blocks -- just notfications
+-(void)getOrganizations;
+-(void)getProductForOID:(NSString *)oid;
+-(void)getDocumentInfoForOID:(NSString *)oid;
+
 @end
 // vim: set sw=4 ts=4 expandtab:
