@@ -1,6 +1,6 @@
 =================================
 Multi Split View & Windchill Demo
-============================
+=================================
 
 :Author:    Stefan Eletzhofer
 :Date:      2011-03-17
@@ -47,7 +47,7 @@ Test JSP (to test authentication)::
     #-------------------------------------------------
   
 
-Organization Data::
+Organization Data using the **get_organizations** API::
 
     $ curl -s --user wcadmin:wcadmin  'wc.nexiles.com/Windchill/netmarkets/jsp/nexiles/json.jsp?m=list&f=get_organizations' | python -mjson.tool
     {
@@ -90,7 +90,7 @@ Organization Data::
         ]
     }
 
-Product listing::
+Product listing using the **get_product** API::
 
     $ curl -s --user wcadmin:wcadmin  'http://wc.nexiles.com/Windchill/netmarkets/jsp/nexiles/json.jsp?m=list&f=get_product&oid=OR:wt.pdmlink.PDMLinkProduct:35696' | python -mjson.tool
     {
@@ -109,7 +109,7 @@ Product listing::
      }
 
 
-Document info::
+Document info using thet **get_epm_document** API::
 
     $ curl -s --user wcadmin:wcadmin  'http://wc.nexiles.com/Windchill/netmarkets/jsp/nexiles/json.jsp?m=list&f=get_epm_document&oid=OR:wt.epm.EPMDocument:46499' | python -mjson.tool
     {
@@ -196,6 +196,7 @@ Changelog
 ----------------
 
 - begun Readme and Changelog
+- added JSON API docs.
 
 
 ::
