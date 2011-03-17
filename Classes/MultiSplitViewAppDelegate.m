@@ -8,8 +8,10 @@
 
 #import "MultiSplitViewAppDelegate.h"
 
+#import "ASIHTTPRequest.h"
 #import "ViewRegistry.h"
 #import "NXDataLoader.h"
+#import "NXWindchillDataLoader.h"
 
 #import "OrgDetailViewController.h"
 #import "OrgRootViewController.h"
@@ -63,6 +65,47 @@
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
   [nc addObserver:self selector:@selector(newRootController:) name:@"new_root_controller" object:nil];
   [nc addObserver:self selector:@selector(newDetailController:) name:@"new_detail_controller" object:nil];
+
+
+
+  /// test the NXWindchillDataLoader
+  NXWindchillDataLoader *dataLoader = [NXWindchillDataLoader sharedLoader];
+
+  dataLoader.baseURL = @"http://wc.nexiles.com/Windchill/netmarkets/jsp/nexiles";
+  dataLoader.username = @"wcadmin";
+  dataLoader.password = @"wcadmin";
+
+
+  [dataLoader getOrganizationsWithSuccess:
+    ^(NSDictionary *data){
+            NSLog(@"%s: data=%@", __func__, data);
+
+        }
+                                  failure:
+    ^(ASIHTTPRequest *request){
+            NSLog(@"%s: error=%@", __func__, request.error);
+
+        }];
+
+  [dataLoader getProductsForOrganization:@"OR:wt.pdmlink.PDMLinkProduct:35696"
+                                 success:^(NSDictionary *data){
+            NSLog(@"%s: data=%@", __func__, data);
+
+        }
+                                  failure:^(ASIHTTPRequest *request){
+            NSLog(@"%s: error=%@", __func__, request.error);
+
+        }];
+
+  [dataLoader getDocumentInfoForOID:@"OR:wt.epm.EPMDocument:46499"
+                            success:^(NSDictionary *data){
+            NSLog(@"%s: data=%@", __func__, data);
+
+        }
+                            failure:^(ASIHTTPRequest *request){
+            NSLog(@"%s: error=%@", __func__, request.error);
+
+        }];
 
   // Add the split view controller's view to the window and display.
   [self.window addSubview:splitViewController.view];

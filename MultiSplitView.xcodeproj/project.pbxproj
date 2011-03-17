@@ -26,6 +26,7 @@
 		BF44BA441332322E003E780B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF44BA431332322E003E780B /* MobileCoreServices.framework */; };
 		BF44BA461332322E003E780B /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF44BA451332322E003E780B /* libz.1.2.3.dylib */; };
 		BF44BA4C13323249003E780B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF44BA4B13323249003E780B /* SystemConfiguration.framework */; };
+		BF44BA5313323309003E780B /* NXWindchillDataLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = BF44BA5213323309003E780B /* NXWindchillDataLoader.m */; };
 		BF5C51231327FFFD000BB093 /* ViewRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5C51221327FFFD000BB093 /* ViewRegistry.m */; };
 		BF5C5174132807DB000BB093 /* OrgDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5C5172132807DB000BB093 /* OrgDetailViewController.m */; };
 		BF5C5175132807DB000BB093 /* OrgDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF5C5173132807DB000BB093 /* OrgDetailViewController.xib */; };
@@ -92,6 +93,8 @@
 		BF44BA431332322E003E780B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		BF44BA451332322E003E780B /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		BF44BA4B13323249003E780B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		BF44BA5113323309003E780B /* NXWindchillDataLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXWindchillDataLoader.h; sourceTree = "<group>"; };
+		BF44BA5213323309003E780B /* NXWindchillDataLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXWindchillDataLoader.m; sourceTree = "<group>"; };
 		BF5C51211327FFFD000BB093 /* ViewRegistry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewRegistry.h; sourceTree = "<group>"; };
 		BF5C51221327FFFD000BB093 /* ViewRegistry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewRegistry.m; sourceTree = "<group>"; };
 		BF5C5171132807DB000BB093 /* OrgDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrgDetailViewController.h; sourceTree = "<group>"; };
@@ -304,6 +307,8 @@
 				BF5C51221327FFFD000BB093 /* ViewRegistry.m */,
 				BF5C51F313281D3C000BB093 /* NXDataLoader.h */,
 				BF5C51F413281D3C000BB093 /* NXDataLoader.m */,
+				BF44BA5113323309003E780B /* NXWindchillDataLoader.h */,
+				BF44BA5213323309003E780B /* NXWindchillDataLoader.m */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -420,6 +425,7 @@
 				BF44BA33133231BB003E780B /* ASIDataCompressor.m in Sources */,
 				BF44BA34133231BB003E780B /* ASIAuthenticationDialog.m in Sources */,
 				BF44BA38133231DF003E780B /* Reachability.m in Sources */,
+				BF44BA5313323309003E780B /* NXWindchillDataLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
