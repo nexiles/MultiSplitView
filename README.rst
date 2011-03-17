@@ -49,7 +49,7 @@ Test JSP (to test authentication)::
 
 Organization Data using the **get_organizations** API::
 
-    $ curl -s --user wcadmin:wcadmin  'wc.nexiles.com/Windchill/netmarkets/jsp/nexiles/json.jsp?m=list&f=get_organizations' | python -mjson.tool
+    $ curl -s --user wcadmin:wcadmin  'http://wc.nexiles.com/Windchill/netmarkets/jsp/nexiles/json.jsp?m=list&f=get_organizations' | python -mjson.tool
     {
         "organizations": [
             {
